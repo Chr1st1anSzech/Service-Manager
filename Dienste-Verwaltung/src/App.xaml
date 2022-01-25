@@ -24,7 +24,9 @@
                 <ResourceDictionary
                     Source="/src/Styles/Numbers.xaml" />
                 <ResourceDictionary
-                    Source="/src/Styles/ControlTemplates.xaml" />
+                    Source="/src/Styles/Styles.xaml" />
+                <ResourceDictionary
+                    Source="/src/Styles/Templates.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->

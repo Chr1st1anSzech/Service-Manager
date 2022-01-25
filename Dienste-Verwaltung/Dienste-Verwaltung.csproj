@@ -15,6 +15,7 @@
     <None Remove="service-groups.json" />
     <None Remove="src\Assets\icon.ico" />
     <None Remove="src\Assets\icon.png" />
+    <None Remove="src\Styles\Styles.xaml" />
     <None Remove="src\UserControls\ListViewHeaderItem.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.194" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
@@ -70,5 +72,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\Converter\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="src\Styles\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

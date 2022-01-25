@@ -11,7 +11,7 @@
     <Button
         x:Name="blaaa"
         Background="Transparent"
-        BorderThickness="0"
+        BorderThickness="{Binding BorderThickness}"
         HorizontalAlignment="{Binding HorizontalAlignment}"
         HorizontalContentAlignment="Stretch"
         VerticalContentAlignment="Stretch"
