@@ -1,0 +1,110 @@
+﻿<UserControl
+    x:Class="Dienste_Verwaltung.src.UserControls.ListViewHeaderItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dienste_Verwaltung.src.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+    <Button
+        x:Name="blaaa"
+        HorizontalAlignment="{Binding HorizontalAlignment}"
+        HorizontalContentAlignment="Stretch"
+        VerticalContentAlignment="Stretch"
+        Click="Button_Click">
+
+        <Button.Template>
+            <ControlTemplate
+                TargetType="Button">
+                <ContentPresenter
+                    x:Name="ContentPresenter"
+                    Background="{TemplateBinding Background}"
+                    BackgroundSizing="{TemplateBinding BackgroundSizing}"
+                    Foreground="{TemplateBinding Foreground}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Content="{TemplateBinding Content}"
+                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                    ContentTransitions="{TemplateBinding ContentTransitions}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Padding="{TemplateBinding Padding}"
+                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                    AutomationProperties.AccessibilityView="Raw">
+
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup
+                            x:Name="CommonStates">
+                            <VisualState
+                                x:Name="Normal" />
+                            <VisualState
+                                x:Name="PointerOver">
+                                <VisualState.Setters>
+                                    <Setter
+                                        Target="ContentPresenter.Background"
+                                        Value="{ThemeResource PrimaryBackgroundHover}" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState
+                                x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter
+                                        Target="ContentPresenter.Background"
+                                        Value="{ThemeResource PrimaryBackgroundPressed}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </ContentPresenter>
+            </ControlTemplate>
+        </Button.Template>
+        
+        <Button.Content>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Border>
+                    <TextBlock
+                        Grid.Column="0"
+                        FontSize="12"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        TextTrimming="CharacterEllipsis"
+                        Foreground="{ThemeResource SecondaryForeground}"
+                        Text="{Binding HeaderText}" />
+                </Border>
+                <Viewbox
+                    Grid.Column="1">
+                    <Path
+                        Opacity="{Binding ArrowVisibility}"
+                        Fill="{ThemeResource SecondaryForeground}"
+                        Data="M19.7036 12L11.2125 3.27302C10.9236 2.97614 10.9301 2.50131 11.227 2.21246C11.5239 1.9236 11.9987 1.93011 12.2875 2.22698L21.2875 11.477C21.5708 11.7681 21.5708 12.2319 21.2875 12.523L12.2875 21.773C11.9987 22.0699 11.5239 22.0764 11.227 21.7875C10.9301 21.4987 10.9236 21.0239 11.2125 20.727L19.7036 12Z">
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform
+                                    x:Name="IconRotation"
+                                    Angle="-90"
+                                    CenterX="15"
+                                    CenterY="13" />
+                                <ScaleTransform
+                                    ScaleX="0.5"
+                                    ScaleY="0.5" />
+                                <TranslateTransform
+                                    X="4"
+                                    Y="7" />
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                    </Path>
+                </Viewbox>
+            </Grid>
+        </Button.Content>
+    </Button>
+</UserControl>

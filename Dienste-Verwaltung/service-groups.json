@@ -1,0 +1,10 @@
+[
+  {
+    "GroupName": "Microsoft",
+    "ServiceNames": [ "MicrosoftEdgeElevationService", "NgcSvc", "InstallService" ]
+  },
+  {
+    "GroupName": "HyperV",
+    "ServiceNames": [ "vmickvpexchange", "vmictimesync", "gcs" ]
+  }
+]

@@ -1,0 +1,113 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+
+    <!--#region accent -->
+    <SolidColorBrush
+        x:Key="Accent">#2896ed</SolidColorBrush>
+    <SolidColorBrush
+        x:Key="AccentHover">#195482</SolidColorBrush>
+    <!--#endregion-->
+
+
+
+    <!--#region borders -->
+    <SolidColorBrush
+        x:Key="Border">#e0e6ea</SolidColorBrush>
+    <!--#endregion-->
+
+
+
+    <!--#region background -->
+    <SolidColorBrush
+        x:Key="PrimaryBackground">#f6f9fc</SolidColorBrush>
+    <SolidColorBrush
+        x:Key="SecondaryBackground">#f0f4f7</SolidColorBrush>
+
+    <SolidColorBrush
+        x:Key="PrimaryBackgroundHover">#f0f0f0</SolidColorBrush>
+    <SolidColorBrush
+        x:Key="SecondaryBackgroundHover">#c2c2c2</SolidColorBrush>
+
+    <SolidColorBrush
+        x:Key="PrimaryBackgroundPressed">#f0f0f0</SolidColorBrush>
+    <SolidColorBrush
+        x:Key="SecondaryBackgroundPressed">#333333</SolidColorBrush>
+    <!--#endregion-->
+
+
+
+    <!--#region foreground -->
+    <SolidColorBrush
+        x:Key="Foreground">#2a2a2a</SolidColorBrush>
+    <SolidColorBrush
+        x:Key="SecondaryForeground">#747474</SolidColorBrush>
+    <SolidColorBrush
+        x:Key="TertiaryForeground">#5f6264</SolidColorBrush>
+    <SolidColorBrush
+        x:Key="AccentForeground">#195482</SolidColorBrush>
+    
+    
+    <SolidColorBrush
+        x:Key="PrimaryForegroundHover">#212121</SolidColorBrush>
+    <SolidColorBrush
+        x:Key="SecondaryForegroundHover">#212121</SolidColorBrush>
+
+    <SolidColorBrush
+        x:Key="PrimaryForegroundPressed">#5b5b5b</SolidColorBrush>
+    <SolidColorBrush
+        x:Key="SecondaryForegroundPressed">#dedede</SolidColorBrush>
+
+    <SolidColorBrush
+        x:Key="PrimaryForegroundDisabled">#000000</SolidColorBrush>
+    <SolidColorBrush
+        x:Key="SecondaryForegroundDisabled">#000000</SolidColorBrush>
+    <!--#endregion-->
+
+    
+    <SolidColorBrush
+        x:Key="AppBarButtonBackgroundPointerOver"
+        Color="#f0f0f0" />
+    
+
+    <!--#region  window caption -->
+    <SolidColorBrush
+        x:Key="WindowCaptionBackground"
+        Color="#f0f4f7" />
+    <SolidColorBrush
+        x:Key="WindowCaptionForeground"
+        Color="#000000" />
+    <SolidColorBrush
+        x:Key="WindowCaptionBackgroundDisabled"
+        Color="#f0f4f7" />
+    <SolidColorBrush
+        x:Key="WindowCaptionForegroundDisabled"
+        Color="#000000" />
+
+    <SolidColorBrush
+        x:Key="WindowCaptionButtonBackgroundPointerOver"
+        Color="#c2c2c2" />
+    <SolidColorBrush
+        x:Key="WindowCaptionButtonBackgroundPressed"
+        Color="#333333" />
+    <SolidColorBrush
+        x:Key="WindowCaptionButtonBackgroundDisabled"
+        Color="#f0f4f7" />
+
+    <SolidColorBrush
+        x:Key="WindowCaptionButtonStroke"
+        Color="#000000" />
+    <SolidColorBrush
+        x:Key="WindowCaptionButtonStrokePointerOver"
+        Color="#212121" />
+    <SolidColorBrush
+        x:Key="WindowCaptionButtonStrokePressed"
+        Color="#dedede" />
+    <SolidColorBrush
+        x:Key="WindowCaptionButtonStrokeDisabled"
+        Color="#000000" />
+    <!--#endregion-->
+
+</ResourceDictionary>

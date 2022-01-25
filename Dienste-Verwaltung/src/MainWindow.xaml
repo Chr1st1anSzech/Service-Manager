@@ -1,0 +1,41 @@
+﻿<Window
+    x:Class="Dienste_Verwaltung.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dienste_Verwaltung"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid
+        x:Name="rootPanel">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition
+                Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel
+            Height="45"
+            Orientation="Horizontal"
+            Spacing="10"
+            x:Name="myTitleBar"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top">
+            <Image
+                Source="ms-appx:///src/Assets/icon.ico"
+                Width="15"
+                Height="15"
+                Margin="10,0,0,0" />
+            <TextBlock
+                VerticalAlignment="Center"
+                Text="Dienste-Manager"
+                Foreground="{ThemeResource Foreground}"
+                FontSize="14" />
+        </StackPanel>
+
+        <Frame
+            Grid.Row="1"
+            x:Name="MainWindowFrame" />
+    </Grid>
+
+</Window>

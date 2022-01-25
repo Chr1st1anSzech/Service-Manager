@@ -1,0 +1,729 @@
+﻿<Page
+    x:Class="Dienste_Verwaltung.src.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dienste_Verwaltung.src.Views"
+    xmlns:selectors="using:Dienste_Verwaltung.src.Selectors"
+    xmlns:datatmodel="using:Dienste_Verwaltung.src.DataModels"
+    xmlns:usercontrols="using:Dienste_Verwaltung.src.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:viewmodels="using:Dienste_Verwaltung.src.Viewmodels"
+    Background="{ThemeResource SecondaryBackground}">
+
+    <Page.DataContext>
+        <viewmodels:MainPageViewModel />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <Style
+            TargetType="TextBlock"
+            x:Key="ListViewTextBlock">
+            <Style.Setters>
+                <Setter
+                    Property="FontFamily"
+                    Value="Segoe UI" />
+                <Setter
+                    Property="TextTrimming"
+                    Value="CharacterEllipsis" />
+                <Setter
+                    Property="Padding"
+                    Value="0" />
+                <Setter
+                    Property="Margin"
+                    Value="0" />
+                <Setter
+                    Property="VerticalAlignment"
+                    Value="Center" />
+            </Style.Setters>
+        </Style>
+        <Style
+            TargetType="TextBlock"
+            x:Key="PrimaryTextBlock"
+            BasedOn="{StaticResource ListViewTextBlock}">
+            <Setter
+                Property="FontSize"
+                Value="14" />
+            <Setter
+                Property="Foreground"
+                Value="{ThemeResource Foreground}" />
+        </Style>
+        <Style
+            TargetType="TextBlock"
+            x:Key="SecondaryTextBlock"
+            BasedOn="{StaticResource ListViewTextBlock}">
+            <Setter
+                Property="FontSize"
+                Value="12" />
+            <Setter
+                Property="Foreground"
+                Value="{ThemeResource SecondaryForeground}" />
+        </Style>
+        <Style
+            TargetType="TextBlock"
+            x:Key="HeaderTextBlock"
+            BasedOn="{StaticResource ListViewTextBlock}">
+            <Style.Setters>
+                <Setter
+                    Property="FontSize"
+                    Value="12" />
+                <Setter
+                    Property="Foreground"
+                    Value="{ThemeResource SecondaryForeground}" />
+                <Setter
+                    Property="Padding"
+                    Value="6,12,0,0" />
+            </Style.Setters>
+        </Style>
+
+        <Style
+            TargetType="Path">
+            <Style.Setters>
+                <Setter
+                    Property="Fill"
+                    Value="{ThemeResource TertiaryForeground}" />
+                <Setter
+                    Property="VerticalAlignment"
+                    Value="Center" />
+            </Style.Setters>
+        </Style>
+        <Style
+            TargetType="AppBarSeparator">
+            <Style.Setters>
+                <Setter
+                    Property="Foreground"
+                    Value="#dedfe0" />
+            </Style.Setters>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="auto" />
+            <RowDefinition
+                Height="auto" />
+            <RowDefinition
+                Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="*" />
+            <ColumnDefinition
+                Width="4*" />
+            <ColumnDefinition
+                Width=".8*" />
+        </Grid.ColumnDefinitions>
+
+
+
+        <!--#region Grid Werkzeug-->
+        <Border
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Grid.Row="0"
+            BorderBrush="{ThemeResource Border}"
+            BorderThickness="0,0,0,1">
+            <StackPanel
+                Orientation="Horizontal">
+
+                <Button
+                    x:Name="NewGroupButton"
+                    AccessKey="N"
+                    Style="{StaticResource IconButton}">
+                    <Button.Content>
+                        <Viewbox>
+                            <Path
+                                Data="M17.5 11C20.5376 11 23 13.4624 23 16.5C23 19.5376 20.5376 22 17.5 22C14.4624 22 12 19.5376 12 16.5C12 13.4624 14.4624 11 17.5 11ZM17.5 12.9992L17.4101 13.0073C17.206 13.0443 17.0451 13.2053 17.0081 13.4094L17 13.4992L16.9996 15.9992L14.4977 16L14.4078 16.0081C14.2037 16.0451 14.0427 16.206 14.0057 16.4101L13.9977 16.5L14.0057 16.5899C14.0427 16.794 14.2037 16.9549 14.4078 16.9919L14.4977 17L17.0007 16.9992L17.0011 19.5035L17.0092 19.5934C17.0462 19.7975 17.2071 19.9584 17.4112 19.9954L17.5011 20.0035L17.591 19.9954C17.7951 19.9584 17.956 19.7975 17.9931 19.5934L18.0011 19.5035L18.0007 16.9992L20.5046 17L20.5944 16.9919C20.7985 16.9549 20.9595 16.794 20.9965 16.5899L21.0046 16.5L20.9965 16.4101C20.9595 16.206 20.7985 16.0451 20.5944 16.0081L20.5046 16L17.9996 15.9992L18 13.4992L17.9919 13.4094C17.9549 13.2053 17.794 13.0443 17.5899 13.0073L17.5 12.9992ZM8.20693 4C8.66749 4 9.1153 4.14129 9.49094 4.40235L9.64734 4.5215L12.022 6.5H19.75C20.8867 6.5 21.8266 7.34297 21.9785 8.43788L21.9948 8.59595L22 8.75L22.0008 11.8104C21.5566 11.384 21.052 11.02 20.5011 10.7328L20.5 8.75C20.5 8.3703 20.2178 8.05651 19.8518 8.00685L19.75 8H12.021L9.64734 9.9785C9.29353 10.2733 8.85906 10.4515 8.40335 10.4914L8.20693 10.5L3.5 10.499V17.75C3.5 18.1297 3.78215 18.4435 4.14823 18.4932L4.25 18.5L11.3136 18.5004C11.4861 19.0342 11.7257 19.5378 12.0226 20.0012L4.25 20C3.05914 20 2.08436 19.0748 2.00519 17.904L2 17.75V6.25C2 5.05914 2.92516 4.08436 4.09595 4.00519L4.25 4H8.20693ZM8.20693 5.5H4.25C3.8703 5.5 3.55651 5.78215 3.50685 6.14823L3.5 6.25V8.999L8.20693 9C8.34729 9 8.4841 8.96063 8.60221 8.88738L8.68706 8.82617L10.578 7.249L8.68706 5.67383C8.57923 5.58398 8.44893 5.52664 8.31129 5.5073L8.20693 5.5Z" />
+                        </Viewbox>
+                    </Button.Content>
+                </Button>
+
+                <Button
+                    x:Name="DeleteGroupButton"
+                    AccessKey="D"
+                    Style="{StaticResource IconButton}">
+                    <Button.Content>
+                        <Viewbox>
+                            <Path
+                                Data="M12 1.75C13.733 1.75 15.1492 3.10645 15.2449 4.81558L15.25 5H20.5C20.9142 5 21.25 5.33579 21.25 5.75C21.25 6.1297 20.9678 6.44349 20.6018 6.49315L20.5 6.5H19.704L18.4239 19.5192C18.2912 20.8683 17.1984 21.91 15.8626 21.9945L15.6871 22H8.31293C6.95734 22 5.81365 21.0145 5.59883 19.6934L5.57614 19.5192L4.295 6.5H3.5C3.1203 6.5 2.80651 6.21785 2.75685 5.85177L2.75 5.75C2.75 5.3703 3.03215 5.05651 3.39823 5.00685L3.5 5H8.75C8.75 3.20507 10.2051 1.75 12 1.75ZM18.197 6.5H5.802L7.06893 19.3724C7.12768 19.9696 7.60033 20.4343 8.18585 20.4936L8.31293 20.5H15.6871C16.2872 20.5 16.7959 20.0751 16.9123 19.4982L16.9311 19.3724L18.197 6.5ZM13.75 9.25C14.1297 9.25 14.4435 9.53215 14.4932 9.89823L14.5 10V17C14.5 17.4142 14.1642 17.75 13.75 17.75C13.3703 17.75 13.0565 17.4678 13.0068 17.1018L13 17V10C13 9.58579 13.3358 9.25 13.75 9.25ZM10.25 9.25C10.6297 9.25 10.9435 9.53215 10.9932 9.89823L11 10V17C11 17.4142 10.6642 17.75 10.25 17.75C9.8703 17.75 9.55651 17.4678 9.50685 17.1018L9.5 17V10C9.5 9.58579 9.83579 9.25 10.25 9.25ZM12 3.25C11.0818 3.25 10.3288 3.95711 10.2558 4.85647L10.25 5H13.75C13.75 4.0335 12.9665 3.25 12 3.25Z" />
+                        </Viewbox>
+                    </Button.Content>
+                </Button>
+
+                <AppBarSeparator />
+
+                <Button
+                    x:Name="RefreshButton"
+                    AccessKey="F"
+                    Style="{StaticResource IconButton}">
+                    <Button.Content>
+                        <Viewbox>
+                            <Path
+                                Data="M16.2506 5.18011C15.9994 5.50947 16.0627 5.9801 16.3921 6.23128C18.1804 7.59515 19.25 9.70821 19.25 12C19.25 15.736 16.4242 18.812 12.7933 19.2071L13.4697 18.5303C13.7626 18.2374 13.7626 17.7626 13.4697 17.4697C13.2034 17.2034 12.7867 17.1792 12.4931 17.3971L12.409 17.4697L10.409 19.4697C10.1427 19.7359 10.1185 20.1526 10.3364 20.4462L10.409 20.5303L12.409 22.5303C12.7019 22.8232 13.1768 22.8232 13.4697 22.5303C13.7359 22.2641 13.7601 21.8474 13.5423 21.5538L13.4697 21.4697L12.7194 20.7208C17.2154 20.355 20.75 16.5903 20.75 12C20.75 9.23526 19.4582 6.68321 17.3017 5.03856C16.9724 4.78738 16.5017 4.85075 16.2506 5.18011ZM10.5303 1.46967C10.2374 1.76256 10.2374 2.23744 10.5303 2.53033L11.2796 3.27923C6.78409 3.6456 3.25 7.41008 3.25 12C3.25 14.6445 4.43126 17.0974 6.43081 18.7491C6.75016 19.0129 7.22289 18.9679 7.48669 18.6485C7.75048 18.3292 7.70545 17.8564 7.3861 17.5926C5.72793 16.2229 4.75 14.1922 4.75 12C4.75 8.26436 7.57532 5.18861 11.2057 4.79301L10.5303 5.46967C10.2374 5.76256 10.2374 6.23744 10.5303 6.53033C10.8232 6.82322 11.2981 6.82322 11.591 6.53033L13.591 4.53033C13.8839 4.23744 13.8839 3.76256 13.591 3.46967L11.591 1.46967C11.2981 1.17678 10.8232 1.17678 10.5303 1.46967Z" />
+                        </Viewbox>
+                    </Button.Content>
+                </Button>
+
+                <AppBarSeparator />
+
+                <Button
+                    x:Name="StartButton"
+                    AccessKey="S"
+                    Style="{StaticResource IconButton}">
+                    <Button.Content>
+                        <Viewbox>
+                            <Path
+                                Data="M7.60846 4.61489C7.1087 4.34296 6.5 4.70472 6.5 5.27368V18.726C6.5 19.2949 7.1087 19.6567 7.60846 19.3848L19.97 12.6586C20.4921 12.3746 20.4921 11.6251 19.97 11.341L7.60846 4.61489ZM5 5.27368C5 3.56682 6.82609 2.48151 8.32538 3.2973L20.687 10.0235C22.2531 10.8756 22.2531 13.124 20.687 13.9762L8.32538 20.7024C6.82609 21.5181 5 20.4328 5 18.726V5.27368Z" />
+                        </Viewbox>
+                    </Button.Content>
+                </Button>
+                <Button
+                    x:Name="PauseButton"
+                    AccessKey="P"
+                    Style="{StaticResource IconButton}">
+                    <Button.Content>
+                        <Viewbox>
+                            <Path
+                                Data="M5.74609 3C4.7796 3 3.99609 3.7835 3.99609 4.75V19.25C3.99609 20.2165 4.7796 21 5.74609 21H9.24609C10.2126 21 10.9961 20.2165 10.9961 19.25V4.75C10.9961 3.7835 10.2126 3 9.24609 3H5.74609ZM5.49609 4.75C5.49609 4.61193 5.60802 4.5 5.74609 4.5H9.24609C9.38416 4.5 9.49609 4.61193 9.49609 4.75V19.25C9.49609 19.3881 9.38416 19.5 9.24609 19.5H5.74609C5.60802 19.5 5.49609 19.3881 5.49609 19.25V4.75Z M14.7461 3C13.7796 3 12.9961 3.7835 12.9961 4.75V19.25C12.9961 20.2165 13.7796 21 14.7461 21H18.2461C19.2126 21 19.9961 20.2165 19.9961 19.25V4.75C19.9961 3.7835 19.2126 3 18.2461 3H14.7461ZM14.4961 4.75C14.4961 4.61193 14.608 4.5 14.7461 4.5H18.2461C18.3842 4.5 18.4961 4.61193 18.4961 4.75V19.25C18.4961 19.3881 18.3842 19.5 18.2461 19.5H14.7461C14.608 19.5 14.4961 19.3881 14.4961 19.25V4.75Z" />
+                        </Viewbox>
+                    </Button.Content>
+
+                </Button>
+                <Button
+                    x:Name="StopButton"
+                    AccessKey="T"
+                    Style="{StaticResource IconButton}">
+                    <Button.Content>
+                        <Viewbox>
+                            <Path
+                                Data="M19.25 4.5C19.3881 4.5 19.5 4.61193 19.5 4.75V19.25C19.5 19.3881 19.3881 19.5 19.25 19.5H4.75C4.61193 19.5 4.5 19.3881 4.5 19.25V4.75C4.5 4.61193 4.61193 4.5 4.75 4.5H19.25ZM4.75 3C3.7835 3 3 3.7835 3 4.75V19.25C3 20.2165 3.7835 21 4.75 21H19.25C20.2165 21 21 20.2165 21 19.25V4.75C21 3.7835 20.2165 3 19.25 3H4.75Z" />
+                        </Viewbox>
+                    </Button.Content>
+                </Button>
+                <Button
+                    x:Name="RestartButton"
+                    AccessKey="R"
+                    Style="{StaticResource IconButton}">
+                    <Button.Content>
+                        <Viewbox>
+                            <Path
+                                Data="M6.78033 2.71967C7.07322 3.01256 7.07322 3.48744 6.78033 3.78033L4.56066 6H13.25C17.5302 6 21 9.46979 21 13.75C21 18.0302 17.5302 21.5 13.25 21.5C8.96979 21.5 5.5 18.0302 5.5 13.75C5.5 13.3358 5.83579 13 6.25 13C6.66421 13 7 13.3358 7 13.75C7 17.2018 9.79822 20 13.25 20C16.7018 20 19.5 17.2018 19.5 13.75C19.5 10.2982 16.7018 7.5 13.25 7.5H4.56066L6.78033 9.71967C7.07322 10.0126 7.07322 10.4874 6.78033 10.7803C6.48744 11.0732 6.01256 11.0732 5.71967 10.7803L2.21967 7.28033C1.92678 6.98744 1.92678 6.51256 2.21967 6.21967L5.71967 2.71967C6.01256 2.42678 6.48744 2.42678 6.78033 2.71967Z" />
+                        </Viewbox>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </Border>
+        <!--#endregion-->
+
+
+
+        <!--#region Grid Gruppen-->
+        <Grid
+            Grid.Column="0"
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Padding="18"
+            BorderBrush="{ThemeResource Border}"
+            BorderThickness="0,0,1,0"
+            Background="{ThemeResource PrimaryBackground}">
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="auto" />
+                <RowDefinition
+                    Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+
+                <ControlTemplate
+                    TargetType="TreeViewItem"
+                    x:Key="TreeViewControlTemplate">
+                    <Grid
+                        x:Name="ContentPresenterGrid"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
+                        Margin="0"
+                        Padding="0"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                Width="Auto" />
+                            <ColumnDefinition
+                                Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup
+                                x:Name="CommonStates">
+                                <VisualState
+                                    x:Name="Normal" />
+                                <VisualState
+                                    x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter
+                                            Target="ContentPresenterGrid.Background"
+                                            Value="{ThemeResource PrimaryBackgroundHover}" />
+                                        <Setter
+                                            Target="ContentPresenter.Foreground"
+                                            Value="{ThemeResource PrimaryForegroundHover}" />
+                                        <Setter
+                                            Target="SelectionIndicator.Opacity"
+                                            Value="0" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState
+                                    x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter
+                                            Target="ContentPresenterGrid.Background"
+                                            Value="{ThemeResource PrimaryBackgroundPressed}" />
+                                        <Setter
+                                            Target="ContentPresenter.Foreground"
+                                            Value="{ThemeResource PrimaryForegroundPressed}" />
+                                        <Setter
+                                            Target="SelectionIndicator.Opacity"
+                                            Value="0" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState
+                                    x:Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter
+                                            Target="SelectionIndicator.Opacity"
+                                            Value="1" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <!--<VisualState
+                                    x:Name="PressedSelected">
+                                    <VisualState.Setters>
+                                        <Setter
+                                            Target="ContentPresenterGrid.Background"
+                                            Value="{ThemeResource TreeViewItemBackgroundSelectedPressed}" />
+                                        <Setter
+                                            Target="ContentPresenter.Foreground"
+                                            Value="{ThemeResource TreeViewItemForegroundSelectedPressed}" />
+                                    </VisualState.Setters>
+                                </VisualState>-->
+                            </VisualStateGroup>
+                            <!--<VisualStateGroup
+                                x:Name="TreeViewMultiSelectStates">
+                                <VisualState
+                                    x:Name="TreeViewMultiSelectDisabled" />
+                                <VisualState
+                                    x:Name="TreeViewMultiSelectEnabledUnselected">
+                                    <VisualState.Setters>
+                                        <Setter
+                                            Target="ExpandCollapseChevron.Padding"
+                                            Value="0,0,14,0" />
+                                        <Setter
+                                            Target="ContentPresenterGrid.Padding"
+                                            Value="0" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState
+                                    x:Name="TreeViewMultiSelectEnabledSelected">
+                                    <VisualState.Setters>
+                                        <Setter
+                                            Target="MultiSelectGrid.Background"
+                                            Value="{ThemeResource TreeViewItemBackgroundSelected}" />
+                                        <Setter
+                                            Target="ExpandCollapseChevron.Padding"
+                                            Value="0,0,14,0" />
+                                        <Setter
+                                            Target="ContentPresenterGrid.Padding"
+                                            Value="0" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>-->
+                            <VisualStateGroup
+                                x:Name="DragStates">
+                                <VisualState
+                                    x:Name="NotDragging" />
+                                <VisualState
+                                    x:Name="MultipleDraggingPrimary">
+                                    <VisualState.Setters>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Rectangle
+                            x:Name="SelectionIndicator"
+                            Width="3"
+                            Height="16"
+                            Fill="{ThemeResource Accent}"
+                            Opacity="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            RadiusX="2"
+                            RadiusY="2" />
+
+                        <Grid
+                            x:Name="ExpandCollapseChevron"
+                            Grid.Column="0"
+                            Padding="3,0"
+                            Width="Auto"
+                            Opacity="{TemplateBinding GlyphOpacity}"
+                            Background="Transparent">
+                            <TextBlock
+                                x:Name="CollapsedGlyph"
+                                Foreground="{ThemeResource Foreground}"
+                                Width="12"
+                                Height="12"
+                                Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TreeViewItemTemplateSettings.CollapsedGlyphVisibility}"
+                                FontSize="{TemplateBinding GlyphSize}"
+                                Text="{TemplateBinding CollapsedGlyph}"
+                                FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                Padding="2"
+                                VerticalAlignment="Center"
+                                AutomationProperties.AccessibilityView="Raw"
+                                IsTextScaleFactorEnabled="False"
+                                IsHitTestVisible="False" />
+                            <TextBlock
+                                x:Name="ExpandedGlyph"
+                                Foreground="{ThemeResource Foreground}"
+                                Width="12"
+                                Height="12"
+                                Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TreeViewItemTemplateSettings.ExpandedGlyphVisibility}"
+                                FontSize="{TemplateBinding GlyphSize}"
+                                Text="{TemplateBinding ExpandedGlyph}"
+                                FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                Padding="2"
+                                VerticalAlignment="Center"
+                                AutomationProperties.AccessibilityView="Raw"
+                                IsTextScaleFactorEnabled="False"
+                                IsHitTestVisible="False" />
+                        </Grid>
+
+                        <ContentPresenter
+                            Grid.Column="1"
+                            x:Name="ContentPresenter"
+                            IsHitTestVisible="false"
+                            ContentTransitions="{TemplateBinding ContentTransitions}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Content="{TemplateBinding Content}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            Margin="{TemplateBinding Padding}" />
+                    </Grid>
+                </ControlTemplate>
+
+                <DataTemplate
+                    x:Key="GroupTemplate"
+                    x:DataType="datatmodel:ServiceGroupItem">
+                    <TreeViewItem
+                        AutomationProperties.Name="{Binding GroupName}"
+                        Margin="0,16,0,0"
+                        CanDrag="False"
+                        ItemsSource="{Binding Services}"
+                        Template="{StaticResource TreeViewControlTemplate}"
+                        IsExpanded="True">
+                        <StackPanel
+                            Orientation="Horizontal">
+                            <TextBlock
+                                Text="{Binding GroupName}"
+                                FontSize="14"
+                                FontFamily="Segoe UI Semibold"
+                                Foreground="{ThemeResource Foreground}" />
+                        </StackPanel>
+                    </TreeViewItem>
+                </DataTemplate>
+
+                <DataTemplate
+                    x:Key="ServiceTemplate"
+                    x:DataType="datatmodel:ServiceItem">
+                    <TreeViewItem
+                        HorizontalAlignment="Stretch"
+                        Margin="0"
+                        AllowDrop="False"
+                        CollapsedGlyph=""
+                        ExpandedGlyph=""
+                        HorizontalContentAlignment="Stretch"
+                        AutomationProperties.Name="{Binding ServiceName}"
+                        Template="{StaticResource TreeViewControlTemplate}">
+                        <Grid>
+                            <TextBlock
+                                Text="{Binding ServiceName}"
+                                FontSize="12"
+                                Foreground="{ThemeResource SecondaryForeground}" />
+                        </Grid>
+                    </TreeViewItem>
+                </DataTemplate>
+
+                <selectors:GroupServiceItemTemplateSelector
+                    x:Key="GroupServiceItemTemplateSelector"
+                    GroupTemplate="{StaticResource GroupTemplate}"
+                    ServiceTemplate="{StaticResource ServiceTemplate}" />
+
+
+
+            </Grid.Resources>
+            <StackPanel Orientation="Horizontal">
+                <PathIcon
+                    Foreground="{ThemeResource AccentForeground}"
+                    Margin="0,8,6,0"
+                    Data="M8.20693 4C8.66749 4 9.1153 4.14129 9.49094 4.40235L9.64734 4.5215L12.022 6.5H19.75C20.8867 6.5 21.8266 7.34297 21.9785 8.43788L21.9948 8.59595L22 8.75V17.75C22 18.9409 21.0748 19.9156 19.904 19.9948L19.75 20H4.25C3.05914 20 2.08436 19.0748 2.00519 17.904L2 17.75V6.25C2 5.05914 2.92516 4.08436 4.09595 4.00519L4.25 4H8.20693ZM9.64734 9.9785C9.29353 10.2733 8.85906 10.4515 8.40335 10.4914L8.20693 10.5L3.5 10.499V17.75C3.5 18.1297 3.78215 18.4435 4.14823 18.4932L4.25 18.5H19.75C20.1297 18.5 20.4435 18.2178 20.4932 17.8518L20.5 17.75V8.75C20.5 8.3703 20.2178 8.05651 19.8518 8.00685L19.75 8H12.021L9.64734 9.9785ZM8.20693 5.5H4.25C3.8703 5.5 3.55651 5.78215 3.50685 6.14823L3.5 6.25V8.999L8.20693 9C8.34729 9 8.4841 8.96063 8.60221 8.88738L8.68706 8.82617L10.578 7.249L8.68706 5.67383C8.57923 5.58398 8.44893 5.52664 8.31129 5.5073L8.20693 5.5Z"/>
+                <TextBlock
+                    Foreground="{ThemeResource AccentForeground}"
+                    Margin="0,12,0,8"
+                    FontSize="16"
+                    FontFamily="Segoe UI Semibold"
+                    Text="Gruppen">
+                </TextBlock>
+            </StackPanel>
+            <ScrollViewer
+                Grid.Row="1">
+                <TreeView
+                    ScrollViewer.HorizontalScrollMode="Enabled"
+                    ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                    ItemsSource="{Binding ServiceGroups}"
+                    ItemTemplateSelector="{StaticResource GroupServiceItemTemplateSelector}">
+                    <TreeView.ItemContainerStyle>
+                        <Style
+                            TargetType="TreeViewItem">
+                            <Style.Setters>
+                                <Setter
+                                    Property="HorizontalContentAlignment"
+                                    Value="Stretch" />
+                                <Setter
+                                    Property="HorizontalAlignment"
+                                    Value="Stretch" />
+                                <Setter
+                                    Property="Padding"
+                                    Value="0" />
+                                <Setter
+                                    Property="Margin"
+                                    Value="0" />
+                            </Style.Setters>
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                </TreeView>
+            </ScrollViewer>
+        </Grid>
+        <!--#endregion-->
+
+
+
+        <!--#region Grid Listenkopf-->
+        <Border
+            Grid.Column="1"
+            Grid.Row="1"
+            Padding="6"
+            Background="{ThemeResource PrimaryBackground}">
+            <Grid
+                BorderBrush="{ThemeResource Border}"
+                BorderThickness="0,0,0,1"
+                Padding="12,6,12,6"
+                Height="45"
+                ColumnSpacing="12"
+                x:Name="HeaderGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        x:Name="Column"
+                        Width="20" />
+                    <ColumnDefinition
+                        x:Name="Column2"
+                        Width="*" />
+                    <ColumnDefinition
+                        x:Name="Column3"
+                        Width="0.7*" />
+                    <ColumnDefinition
+                        x:Name="Column4"
+                        Width="0.5*" />
+                    <ColumnDefinition
+                        x:Name="Column5"
+                        Width="0.5*" />
+                    <ColumnDefinition
+                        x:Name="Column6"
+                        Width="0.6*" />
+                </Grid.ColumnDefinitions>
+
+                <usercontrols:ListViewHeaderItem
+                    Grid.Column="1"
+                    BorderBrush="{ThemeResource Border}"
+                    BorderThickness="0,0,1,0"
+                    HeaderClicked="ListViewHeaderItem_HeaderClicked"
+                    HeaderText="Anzeigename"
+                    HorizontalAlignment="Stretch" />
+
+                <usercontrols:ListViewHeaderItem
+                    Grid.Column="2"
+                    BorderBrush="{ThemeResource Border}"
+                    BorderThickness="0,0,1,0"
+                    HeaderClicked="ListViewHeaderItem_HeaderClicked"
+                    HeaderText="Dienstname"
+                    HorizontalAlignment="Stretch" />
+
+                <usercontrols:ListViewHeaderItem
+                    Grid.Column="3"
+                    BorderBrush="{ThemeResource Border}"
+                    BorderThickness="0,0,1,0"
+                    HeaderClicked="ListViewHeaderItem_HeaderClicked"
+                    HeaderText="Status"
+                    HorizontalAlignment="Stretch" />
+
+                <usercontrols:ListViewHeaderItem
+                    Grid.Column="4"
+                    BorderBrush="{ThemeResource Border}"
+                    BorderThickness="0,0,1,0"
+                    HeaderClicked="ListViewHeaderItem_HeaderClicked"
+                    HeaderText="Starttyp"
+                    HorizontalAlignment="Stretch" />
+
+                <usercontrols:ListViewHeaderItem
+                    Grid.Column="5"
+                    HeaderClicked="ListViewHeaderItem_HeaderClicked"
+                    HeaderText="Anmelden als"
+                    HorizontalAlignment="Stretch" />
+            </Grid>
+        </Border>
+        <!--#endregion-->
+
+
+
+        <!--#region Grid Service Liste-->
+        <Grid
+            Grid.Row="2"
+            Grid.Column="1"
+            Background="{ThemeResource PrimaryBackground}"
+            BorderBrush="{ThemeResource Border}"
+            BorderThickness="0,0,0,0">
+            <ListView
+                ItemsSource="{Binding Services}"
+                SelectionMode="Extended"
+                x:Name="ServiceListView"
+                SelectionChanged="ServiceListView_SelectionChanged">
+                <!--<ListView.ItemContainerStyle>
+                    <Style
+                        TargetType="ListViewItem">
+                        <Style.Setters>
+                            <Setter
+                                Property="Margin"
+                                Value="0" />
+                            <Setter
+                                Property="HorizontalAlignment"
+                                Value="Stretch" />
+                            <Setter
+                                Property="HorizontalContentAlignment"
+                                Value="Stretch" />
+                        </Style.Setters>
+                    </Style>
+                </ListView.ItemContainerStyle>-->
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid
+                            Padding="0"
+                            Margin="0"
+                            ColumnSpacing="12"
+                            Height="35">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition
+                                    Width="{Binding ElementName=Column, Path=Width, Mode=OneWay}" />
+                                <ColumnDefinition
+                                    Width="{Binding ElementName=Column2, Path=Width, Mode=OneWay}" />
+                                <ColumnDefinition
+                                    Width="{Binding ElementName=Column3, Path=Width, Mode=OneWay}" />
+                                <ColumnDefinition
+                                    Width="{Binding ElementName=Column4, Path=Width, Mode=OneWay}" />
+                                <ColumnDefinition
+                                    Width="{Binding ElementName=Column5, Path=Width, Mode=OneWay}" />
+                                <ColumnDefinition
+                                    Width="{Binding ElementName=Column6, Path=Width, Mode=OneWay}" />
+                            </Grid.ColumnDefinitions>
+                            <Image
+                                Grid.Column="0"
+                                Height="15"
+                                Width="15"
+                                Source="ms-appx:///src/Assets/icon.ico" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Text="{Binding Service.DisplayName}"
+                                Style="{StaticResource PrimaryTextBlock}" />
+                            <TextBlock
+                                Grid.Column="2"
+                                Text="{Binding Service.ServiceName}"
+                                Style="{StaticResource SecondaryTextBlock}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Text="{Binding Service.Status}"
+                                Style="{StaticResource SecondaryTextBlock}" />
+                            <TextBlock
+                                Grid.Column="4"
+                                Text="{Binding Service.StartType}"
+                                Style="{StaticResource SecondaryTextBlock}" />
+                            <TextBlock
+                                Grid.Column="5"
+                                Text="{Binding StartName}"
+                                Style="{StaticResource SecondaryTextBlock}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <!--#endregion-->
+
+
+
+        <!--#region Grid Detail-->
+        <ScrollViewer
+            Grid.Column="2"
+            Grid.Row="1"
+            Grid.RowSpan="2">
+            <StackPanel
+                Background="{ThemeResource PrimaryBackground}"
+                Padding="18"
+                Orientation="Vertical"
+                BorderBrush="{ThemeResource Border}"
+                BorderThickness="1,0,0,0">
+                <TextBlock
+                    Foreground="{ThemeResource AccentForeground}"
+                    Margin="0,12,0,0"
+                    FontSize="16"
+                    FontFamily="Segoe UI Semibold"
+                    TextWrapping="WrapWholeWords"
+                    Visibility="{Binding PreviewVisible}"
+                    Text="{Binding SelectedServiceItem.Service.DisplayName}" />
+                <TextBlock
+                    Foreground="{ThemeResource Foreground}"
+                    TextWrapping="WrapWholeWords"
+                    FontSize="14"
+                    Margin="0,24,0,6"
+                    FontFamily="Segoe UI Semibold"
+                    Text="Pfad zur EXE-Datei"
+                    Visibility="{Binding PreviewVisible}" />
+                <TextBlock
+                    Foreground="{ThemeResource SecondaryForeground}"
+                    TextWrapping="WrapWholeWords"
+                    FontSize="12"
+                    IsTextSelectionEnabled="True"
+                    SelectionHighlightColor="{ThemeResource Accent}"
+                    Text="{Binding SelectedServiceItem.Path}"
+                    Visibility="{Binding PreviewVisible}" />
+                <TextBlock
+                    Foreground="{ThemeResource Foreground}"
+                    TextWrapping="WrapWholeWords"
+                    FontSize="14"
+                    Margin="0,24,0,6"
+                    FontFamily="Segoe UI Semibold"
+                    Text="Beschreibung"
+                    Visibility="{Binding PreviewVisible}" />
+                <TextBlock
+                    Foreground="{ThemeResource SecondaryForeground}"
+                    TextWrapping="WrapWholeWords"
+                    LineHeight="24"
+                    FontSize="12"
+                    IsTextSelectionEnabled="True"
+                    SelectionHighlightColor="{ThemeResource Accent}"
+                    Text="{Binding SelectedServiceItem.Description}"
+                    Visibility="{Binding PreviewVisible}" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+    </Grid>
+</Page>

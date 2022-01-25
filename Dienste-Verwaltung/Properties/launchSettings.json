@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Dienste-Verwaltung (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Dienste-Verwaltung (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
