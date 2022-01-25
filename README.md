@@ -14,3 +14,4 @@ Filtering should be possible on the basis of the groups in order to quickly have
 
 ## Screenshots
 ![Files](Assets/MainPage.png)
+![Files](Assets/MainPage-Dark.png)

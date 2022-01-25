@@ -6,7 +6,7 @@
 
     <!--#region accent -->
     <SolidColorBrush
-        x:Key="Accent">#2896ed</SolidColorBrush>
+        x:Key="Accent">#5fb2f2</SolidColorBrush>
     <SolidColorBrush
         x:Key="AccentHover">#195482</SolidColorBrush>
     <!--#endregion-->
@@ -15,99 +15,95 @@
 
     <!--#region borders -->
     <SolidColorBrush
-        x:Key="Border">#e0e6ea</SolidColorBrush>
+        x:Key="Border">#525252</SolidColorBrush>
     <!--#endregion-->
 
 
 
     <!--#region background -->
     <SolidColorBrush
-        x:Key="PrimaryBackground">#f6f9fc</SolidColorBrush>
+        x:Key="PrimaryBackground">#272727</SolidColorBrush>
     <SolidColorBrush
-        x:Key="SecondaryBackground">#f0f4f7</SolidColorBrush>
+        x:Key="SecondaryBackground">#202020</SolidColorBrush>
 
     <SolidColorBrush
-        x:Key="PrimaryBackgroundHover">#f0f0f0</SolidColorBrush>
+        x:Key="PrimaryBackgroundHover">#343434</SolidColorBrush>
     <SolidColorBrush
-        x:Key="SecondaryBackgroundHover">#c2c2c2</SolidColorBrush>
+        x:Key="SecondaryBackgroundHover">#313131</SolidColorBrush>
 
     <SolidColorBrush
-        x:Key="PrimaryBackgroundPressed">#f0f0f0</SolidColorBrush>
+        x:Key="PrimaryBackgroundPressed">#2f2f2f</SolidColorBrush>
     <SolidColorBrush
-        x:Key="SecondaryBackgroundPressed">#333333</SolidColorBrush>
+        x:Key="SecondaryBackgroundPressed">#272727</SolidColorBrush>
     <!--#endregion-->
 
 
 
     <!--#region foreground -->
     <SolidColorBrush
-        x:Key="Foreground">#2a2a2a</SolidColorBrush>
+        x:Key="Foreground">#f1f1f1</SolidColorBrush>
     <SolidColorBrush
-        x:Key="SecondaryForeground">#747474</SolidColorBrush>
+        x:Key="SecondaryForeground">#c0c0c0</SolidColorBrush>
     <SolidColorBrush
-        x:Key="TertiaryForeground">#5f6264</SolidColorBrush>
+        x:Key="TertiaryForeground">#f1f1f1</SolidColorBrush>
     <SolidColorBrush
-        x:Key="AccentForeground">#195482</SolidColorBrush>
+        x:Key="AccentForeground">#5fb2f2</SolidColorBrush>
     
     
     <SolidColorBrush
-        x:Key="PrimaryForegroundHover">#212121</SolidColorBrush>
+        x:Key="PrimaryForegroundHover">#a6a6a6</SolidColorBrush>
     <SolidColorBrush
-        x:Key="SecondaryForegroundHover">#212121</SolidColorBrush>
+        x:Key="SecondaryForegroundHover">#f1f1f1</SolidColorBrush>
 
     <SolidColorBrush
-        x:Key="PrimaryForegroundPressed">#5b5b5b</SolidColorBrush>
+        x:Key="PrimaryForegroundPressed">#909090</SolidColorBrush>
     <SolidColorBrush
-        x:Key="SecondaryForegroundPressed">#dedede</SolidColorBrush>
+        x:Key="SecondaryForegroundPressed">#cecece</SolidColorBrush>
 
     <SolidColorBrush
         x:Key="PrimaryForegroundDisabled">#000000</SolidColorBrush>
     <SolidColorBrush
         x:Key="SecondaryForegroundDisabled">#000000</SolidColorBrush>
     <!--#endregion-->
-
     
-    <SolidColorBrush
-        x:Key="AppBarButtonBackgroundPointerOver"
-        Color="#f0f0f0" />
     
 
     <!--#region  window caption -->
     <SolidColorBrush
         x:Key="WindowCaptionBackground"
-        Color="#f0f4f7" />
+        Color="#202020" />
     <SolidColorBrush
         x:Key="WindowCaptionForeground"
-        Color="#000000" />
+        Color="#f1f1f1" />
     <SolidColorBrush
         x:Key="WindowCaptionBackgroundDisabled"
-        Color="#f0f4f7" />
+        Color="#202020" />
     <SolidColorBrush
         x:Key="WindowCaptionForegroundDisabled"
-        Color="#000000" />
+        Color="#f1f1f1" />
 
     <SolidColorBrush
         x:Key="WindowCaptionButtonBackgroundPointerOver"
-        Color="#c2c2c2" />
+        Color="#f1f1f1" />
     <SolidColorBrush
         x:Key="WindowCaptionButtonBackgroundPressed"
-        Color="#333333" />
+        Color="#272727" />
     <SolidColorBrush
         x:Key="WindowCaptionButtonBackgroundDisabled"
-        Color="#f0f4f7" />
+        Color="#202020" />
 
     <SolidColorBrush
         x:Key="WindowCaptionButtonStroke"
-        Color="#000000" />
+        Color="#f1f1f1" />
     <SolidColorBrush
         x:Key="WindowCaptionButtonStrokePointerOver"
-        Color="#212121" />
+        Color="#f1f1f1" />
     <SolidColorBrush
         x:Key="WindowCaptionButtonStrokePressed"
         Color="#dedede" />
     <SolidColorBrush
         x:Key="WindowCaptionButtonStrokeDisabled"
-        Color="#000000" />
+        Color="#f1f1f1" />
     <!--#endregion-->
 
 </ResourceDictionary>

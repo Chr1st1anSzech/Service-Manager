@@ -10,6 +10,8 @@
 
     <Button
         x:Name="blaaa"
+        Background="Transparent"
+        BorderThickness="0"
         HorizontalAlignment="{Binding HorizontalAlignment}"
         HorizontalContentAlignment="Stretch"
         VerticalContentAlignment="Stretch"
