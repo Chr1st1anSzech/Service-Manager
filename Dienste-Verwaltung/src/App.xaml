@@ -13,20 +13,20 @@
                     <ResourceDictionary.ThemeDictionaries>
                         <ResourceDictionary
                             x:Key="Dark"
-                            Source="/src/Themes/Dark.xaml" />
+                            Source="ms-appx:///src/Themes/Dark.xaml" />
                         <ResourceDictionary
                             x:Key="Light"
-                            Source="/src/Themes/Light.xaml" />
+                            Source="ms-appx:///src/Themes/Light.xaml" />
                     </ResourceDictionary.ThemeDictionaries>
                 </ResourceDictionary>
 
                 <!-- Other merged dictionaries here -->
                 <ResourceDictionary
-                    Source="/src/Styles/Numbers.xaml" />
+                    Source="ms-appx:///src/Styles/Numbers.xaml" />
                 <ResourceDictionary
-                    Source="/src/Styles/Styles.xaml" />
+                    Source="ms-appx:///src/Styles/Styles.xaml" />
                 <ResourceDictionary
-                    Source="/src/Styles/Templates.xaml" />
+                    Source="ms-appx:///src/Styles/Templates.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->

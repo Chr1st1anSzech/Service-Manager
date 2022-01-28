@@ -210,52 +210,6 @@
         </Grid>
     </ControlTemplate>
 
-
-    <ControlTemplate
-        x:Key="IconButtonTemplate"
-        TargetType="Button">
-        <Border
-            CornerRadius="5"
-            x:Name="RootElement">
-            <VisualStateManager.VisualStateGroups>
-                <VisualStateGroup
-                    x:Name="CommonStates">
-                    <VisualState
-                        x:Name="Normal" />
-                    <VisualState
-                        x:Name="PointerOver">
-                        <VisualState.Setters>
-                            <Setter
-                                Target="BorderBrush.Color"
-                                Value="#f5f9fc" />
-                        </VisualState.Setters>
-                    </VisualState>
-                    <VisualState
-                        x:Name="Pressed">
-                        <VisualState.Setters>
-                            <Setter
-                                Target="BorderBrush.Color"
-                                Value="#d2d6d8" />
-                        </VisualState.Setters>
-                    </VisualState>
-                </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>
-            <Border.Background>
-                <SolidColorBrush
-                    x:Name="BorderBrush"
-                    Color="{TemplateBinding Background}" />
-            </Border.Background>
-            <Grid
-                Margin="4">
-                <ContentPresenter
-                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                    Margin="4,2,6,4" />
-
-            </Grid>
-        </Border>
-    </ControlTemplate>
-
     <DataTemplate x:Key="ListViewItemTemplate">
         <Grid
             Padding="0"

@@ -1,5 +1,16 @@
 ﻿* * * * * * * * * * * * * * * *
 * *
+* * All Icons
+* *
+* * * * * * * * * * * * * * * *
+
+https://www.iconfinder.com/fluent-designsystem
+
+https://creativecommons.org/licenses/by/4.0/
+
+
+* * * * * * * * * * * * * * * *
+* *
 * * Newtonsoft.Json
 * *
 * * * * * * * * * * * * * * * *

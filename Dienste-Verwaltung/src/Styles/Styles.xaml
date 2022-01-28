@@ -127,11 +127,17 @@
                 Property="Margin"
                 Value="3" />
             <Setter
+                Property="Padding"
+                Value="8" />
+            <Setter
                 Property="IsEnabled"
                 Value="true" />
             <Setter
-                Property="Template"
-                Value="{StaticResource IconButtonTemplate}" />
+                Property="Background"
+                Value="Transparent" />
+            <Setter
+                Property="BorderBrush"
+                Value="Transparent" />
         </Style.Setters>
     </Style>
     

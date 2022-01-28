@@ -2,108 +2,211 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <!--#region colors -->
+    <!--#region accent -->
+    <Color
+        x:Key="AccentColor">#5fb2f2</Color>
+    <Color
+        x:Key="AccentHoverColor">#195482</Color>
+    <!--#endregion-->
 
 
+
+    <!--#region borders -->
+    <Color
+        x:Key="BorderColor">#525252</Color>
+    <!--#endregion-->
+
+
+
+    <!--#region background -->
+    <Color
+        x:Key="PrimaryBackgroundColor">#272727</Color>
+    <Color
+        x:Key="SecondaryBackgroundColor">#202020</Color>
+
+    <Color
+        x:Key="PrimaryBackgroundHoverColor">#343434</Color>
+    <Color
+        x:Key="SecondaryBackgroundHoverColor">#313131</Color>
+
+    <Color
+        x:Key="PrimaryBackgroundPressedColor">#2f2f2f</Color>
+    <Color
+        x:Key="SecondaryBackgroundPressedColor">#272727</Color>
+    <!--#endregion-->
+
+
+
+    <!--#region foreground -->
+    <Color
+        x:Key="ForegroundColor">#f1f1f1</Color>
+    <Color
+        x:Key="SecondaryForegroundColor">#c0c0c0</Color>
+    <Color
+        x:Key="TertiaryForegroundColor">#f1f1f1</Color>
+    <Color
+        x:Key="AccentForegroundColor">#5fb2f2</Color>
+
+
+    <Color
+        x:Key="PrimaryForegroundHoverColor">#a6a6a6</Color>
+    <Color
+        x:Key="SecondaryForegroundHoverColor">#f1f1f1</Color>
+
+    <Color
+        x:Key="PrimaryForegroundPressedColor">#909090</Color>
+    <Color
+        x:Key="SecondaryForegroundPressedColor">#cecece</Color>
+
+    <Color
+        x:Key="PrimaryForegroundDisabledColor">#000000</Color>
+    <Color
+        x:Key="SecondaryForegroundDisabledColor">#000000</Color>
+    <!--#endregion-->
+
+    <!--#endregion-->
+
+    <!--#region my brushes-->
+    
     <!--#region accent -->
     <SolidColorBrush
-        x:Key="Accent">#5fb2f2</SolidColorBrush>
+        x:Key="Accent"
+        Color="{StaticResource AccentColor}" />
     <SolidColorBrush
-        x:Key="AccentHover">#195482</SolidColorBrush>
+        x:Key="AccentHover"
+        Color="{StaticResource AccentHoverColor}" />
     <!--#endregion-->
 
 
 
     <!--#region borders -->
     <SolidColorBrush
-        x:Key="Border">#525252</SolidColorBrush>
+        x:Key="Border"
+        Color="{StaticResource BorderColor}" />
     <!--#endregion-->
 
 
 
     <!--#region background -->
     <SolidColorBrush
-        x:Key="PrimaryBackground">#272727</SolidColorBrush>
+        x:Key="PrimaryBackground"
+        Color="{StaticResource PrimaryBackgroundColor}" />
     <SolidColorBrush
-        x:Key="SecondaryBackground">#202020</SolidColorBrush>
+        x:Key="SecondaryBackground"
+        Color="{StaticResource SecondaryBackgroundColor}" />
 
     <SolidColorBrush
-        x:Key="PrimaryBackgroundHover">#343434</SolidColorBrush>
+        x:Key="PrimaryBackgroundHover"
+        Color="{StaticResource PrimaryBackgroundHoverColor}" />
     <SolidColorBrush
-        x:Key="SecondaryBackgroundHover">#313131</SolidColorBrush>
+        x:Key="SecondaryBackgroundHover"
+        Color="{StaticResource SecondaryBackgroundHoverColor}" />
 
     <SolidColorBrush
-        x:Key="PrimaryBackgroundPressed">#2f2f2f</SolidColorBrush>
+        x:Key="PrimaryBackgroundPressed"
+        Color="{StaticResource PrimaryBackgroundPressedColor}" />
     <SolidColorBrush
-        x:Key="SecondaryBackgroundPressed">#272727</SolidColorBrush>
+        x:Key="SecondaryBackgroundPressed"
+        Color="{StaticResource SecondaryBackgroundPressedColor}" />
     <!--#endregion-->
 
 
 
     <!--#region foreground -->
     <SolidColorBrush
-        x:Key="Foreground">#f1f1f1</SolidColorBrush>
+        x:Key="Foreground"
+        Color="{StaticResource ForegroundColor}" />
     <SolidColorBrush
-        x:Key="SecondaryForeground">#c0c0c0</SolidColorBrush>
+        x:Key="SecondaryForeground"
+        Color="{StaticResource SecondaryForegroundColor}" />
     <SolidColorBrush
-        x:Key="TertiaryForeground">#f1f1f1</SolidColorBrush>
+        x:Key="TertiaryForeground"
+        Color="{StaticResource TertiaryForegroundColor}" />
     <SolidColorBrush
-        x:Key="AccentForeground">#5fb2f2</SolidColorBrush>
+        x:Key="AccentForeground"
+        Color="{StaticResource AccentForegroundColor}" />
     
     
     <SolidColorBrush
-        x:Key="PrimaryForegroundHover">#a6a6a6</SolidColorBrush>
+        x:Key="PrimaryForegroundHover"
+        Color="{StaticResource PrimaryForegroundHoverColor}" />
     <SolidColorBrush
-        x:Key="SecondaryForegroundHover">#f1f1f1</SolidColorBrush>
+        x:Key="SecondaryForegroundHover"
+        Color="{StaticResource SecondaryForegroundHoverColor}" />
 
     <SolidColorBrush
-        x:Key="PrimaryForegroundPressed">#909090</SolidColorBrush>
+        x:Key="PrimaryForegroundPressed"
+        Color="{StaticResource PrimaryForegroundPressedColor}" />
     <SolidColorBrush
-        x:Key="SecondaryForegroundPressed">#cecece</SolidColorBrush>
+        x:Key="SecondaryForegroundPressed"
+        Color="{StaticResource SecondaryForegroundPressedColor}" />
 
     <SolidColorBrush
-        x:Key="PrimaryForegroundDisabled">#000000</SolidColorBrush>
+        x:Key="PrimaryForegroundDisabled"
+        Color="{StaticResource PrimaryForegroundDisabledColor}" />
     <SolidColorBrush
-        x:Key="SecondaryForegroundDisabled">#000000</SolidColorBrush>
+        x:Key="SecondaryForegroundDisabled"
+        Color="{StaticResource SecondaryForegroundDisabledColor}" />
     <!--#endregion-->
     
-    
+    <!--#endregion-->
+
+    <!--#region overwrite brushes -->
+
+    <!--#region button brushes -->
+    <SolidColorBrush
+        x:Key="ButtonBackgroundPointerOver"
+        Color="{StaticResource SecondaryBackgroundHoverColor}" />
+    <SolidColorBrush
+        x:Key="ButtonBackgroundPressed"
+        Color="{StaticResource SecondaryBackgroundPressedColor}" />
+    <!--<SolidColorBrush
+        x:Key="ButtonBorderBrushPointerOver"
+        Color="{StaticResource BorderColor}" />
+    <SolidColorBrush
+        x:Key="ButtonBorderBrushPressed"
+        Color="{StaticResource BorderColor}" />-->
+    <!--#endregion-->
 
     <!--#region  window caption -->
     <SolidColorBrush
         x:Key="WindowCaptionBackground"
-        Color="#202020" />
+        Color="{StaticResource SecondaryBackgroundColor}" />
     <SolidColorBrush
         x:Key="WindowCaptionForeground"
-        Color="#f1f1f1" />
+        Color="{StaticResource ForegroundColor}" />
     <SolidColorBrush
         x:Key="WindowCaptionBackgroundDisabled"
-        Color="#202020" />
+        Color="{StaticResource SecondaryBackgroundColor}" />
     <SolidColorBrush
         x:Key="WindowCaptionForegroundDisabled"
-        Color="#f1f1f1" />
+        Color="{StaticResource ForegroundColor}" />
 
     <SolidColorBrush
         x:Key="WindowCaptionButtonBackgroundPointerOver"
-        Color="#f1f1f1" />
+        Color="{StaticResource SecondaryBackgroundHoverColor}" />
     <SolidColorBrush
         x:Key="WindowCaptionButtonBackgroundPressed"
-        Color="#272727" />
+        Color="{StaticResource SecondaryBackgroundPressedColor}" />
     <SolidColorBrush
         x:Key="WindowCaptionButtonBackgroundDisabled"
-        Color="#202020" />
+        Color="{StaticResource SecondaryBackgroundColor}" />
 
     <SolidColorBrush
         x:Key="WindowCaptionButtonStroke"
-        Color="#f1f1f1" />
+        Color="{StaticResource ForegroundColor}" />
     <SolidColorBrush
         x:Key="WindowCaptionButtonStrokePointerOver"
-        Color="#f1f1f1" />
+        Color="{StaticResource ForegroundColor}" />
     <SolidColorBrush
         x:Key="WindowCaptionButtonStrokePressed"
-        Color="#dedede" />
+        Color="{StaticResource SecondaryForegroundPressedColor}" />
     <SolidColorBrush
         x:Key="WindowCaptionButtonStrokeDisabled"
-        Color="#f1f1f1" />
+        Color="{StaticResource ForegroundColor}" />
+    <!--#endregion-->
+    
     <!--#endregion-->
 
 </ResourceDictionary>
