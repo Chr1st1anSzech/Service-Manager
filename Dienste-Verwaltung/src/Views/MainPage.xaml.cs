@@ -70,5 +70,34 @@ namespace Dienste_Verwaltung.src.Views
                 ViewModel.SortList(item.HeaderText, item.SortOrder);
             }
         }
+        private void ServiceHandler(object sender, RoutedEventArgs e)
+        {
+            if (sender is FrameworkElement control && ServiceListView.SelectedItem is ServiceItem serviceItem)
+            {
+                ViewModel.HandleServiceOperation(serviceItem.Service, control.Tag.ToString(), NotifyUser);
+            }
+        }
+
+        private void ServiceFlyout_Opened(object sender, object e)
+        {
+            if (sender is MenuFlyout menueFlyout)
+            {
+                ServiceListView.SelectedItem = menueFlyout.Target.DataContext;
+            }
+        }
+
+        private async void NotifyUser(string reason)
+        {
+            ContentDialog noWifiDialog = new()
+            {
+                Title = "Aktion fehlgeschlagen",
+                Content = $"Die angeforderte Aktion konnte nicht durchgeführt werden. Grund:\n\n{reason}",
+                CloseButtonText = "Ok",
+                XamlRoot = ServiceListView.XamlRoot
+                
+            };
+            
+            await noWifiDialog.ShowAsync();
+        }
     }
 }

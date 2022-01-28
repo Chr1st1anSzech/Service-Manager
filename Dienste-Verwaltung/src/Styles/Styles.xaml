@@ -24,6 +24,7 @@
                 Value="Center" />
         </Style.Setters>
     </Style>
+   
     <Style
         TargetType="TextBlock"
         x:Key="PrimaryTextBlock"
@@ -35,6 +36,7 @@
             Property="Foreground"
             Value="{ThemeResource Foreground}" />
     </Style>
+  
     <Style
         TargetType="TextBlock"
         x:Key="SecondaryTextBlock"
@@ -46,6 +48,7 @@
             Property="Foreground"
             Value="{ThemeResource SecondaryForeground}" />
     </Style>
+ 
     <Style
         TargetType="TextBlock"
         x:Key="HeaderTextBlock"
@@ -62,6 +65,7 @@
                 Value="6,12,0,0" />
         </Style.Setters>
     </Style>
+  
     <Style
         TargetType="toolkit:GridSplitter">
         <Setter
@@ -93,6 +97,7 @@
             Value="{StaticResource GridSplitterTemplate}">
         </Setter>
     </Style>
+  
     <Style
         TargetType="Path">
         <Style.Setters>
@@ -104,6 +109,7 @@
                 Value="Center" />
         </Style.Setters>
     </Style>
+ 
     <Style
         TargetType="AppBarSeparator">
         <Style.Setters>
@@ -140,6 +146,5 @@
                 Value="Transparent" />
         </Style.Setters>
     </Style>
-    
     
 </ResourceDictionary>

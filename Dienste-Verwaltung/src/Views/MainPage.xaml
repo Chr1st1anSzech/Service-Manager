@@ -99,6 +99,8 @@
                 <Button
                     x:Name="StartButton"
                     AccessKey="S"
+                    Click="ServiceHandler"
+                    Tag="Start"
                     Style="{StaticResource IconButton}">
                     <Button.Content>
                         <Viewbox>
@@ -110,6 +112,8 @@
                 <Button
                     x:Name="PauseButton"
                     AccessKey="P"
+                    Click="ServiceHandler"
+                    Tag="Pause"
                     Style="{StaticResource IconButton}">
                     <Button.Content>
                         <Viewbox>
@@ -121,6 +125,8 @@
                 </Button>
                 <Button
                     x:Name="StopButton"
+                    Click="ServiceHandler"
+                    Tag="Stop"
                     AccessKey="T"
                     Style="{StaticResource IconButton}">
                     <Button.Content>
@@ -132,6 +138,8 @@
                 </Button>
                 <Button
                     x:Name="RestartButton"
+                    Click="ServiceHandler"
+                    Tag="Restart"
                     AccessKey="R"
                     Style="{StaticResource IconButton}">
                     <Button.Content>
@@ -361,9 +369,85 @@
             <ListView
                 ItemsSource="{Binding Services}"
                 SelectionMode="Extended"
-                ItemTemplate="{StaticResource ListViewItemTemplate}"
                 x:Name="ServiceListView"
                 SelectionChanged="ServiceListView_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid
+                            Padding="0"
+                            Margin="0"
+                            Background="Transparent"
+                            ColumnSpacing="12"
+                            Height="35"
+                            Tag="{RelativeSource Mode=TemplatedParent}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition
+                                    Width="{Binding ElementName=Column, Path=Width, Mode=OneWay}" />
+                                <ColumnDefinition
+                                    Width="{Binding ElementName=Column2, Path=Width, Mode=OneWay}" />
+                                <ColumnDefinition
+                                    Width="{Binding ElementName=Column3, Path=Width, Mode=OneWay}" />
+                                <ColumnDefinition
+                                    Width="{Binding ElementName=Column4, Path=Width, Mode=OneWay}" />
+                                <ColumnDefinition
+                                    Width="{Binding ElementName=Column5, Path=Width, Mode=OneWay}" />
+                                <ColumnDefinition
+                                    Width="{Binding ElementName=Column6, Path=Width, Mode=OneWay}" />
+                            </Grid.ColumnDefinitions>
+                            <Image
+                                Grid.Column="0"
+                                Height="15"
+                                Width="15"
+                                Source="ms-appx:///src/Assets/icon.ico" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Text="{Binding Service.DisplayName}"
+                                Style="{StaticResource PrimaryTextBlock}" />
+                            <TextBlock
+                                Grid.Column="2"
+                                Text="{Binding Service.ServiceName}"
+                                Style="{StaticResource SecondaryTextBlock}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Text="{Binding Service.Status}"
+                                Style="{StaticResource SecondaryTextBlock}" />
+                            <TextBlock
+                                Grid.Column="4"
+                                Text="{Binding Service.StartType}"
+                                Style="{StaticResource SecondaryTextBlock}" />
+                            <TextBlock
+                                Grid.Column="5"
+                                Text="{Binding StartName}"
+                                Style="{StaticResource SecondaryTextBlock}" />
+                            <Grid.ContextFlyout>
+                                <MenuFlyout
+                                    Opened="ServiceFlyout_Opened"
+                                    x:Name="ServiceFlyout">
+                                    <MenuFlyoutItem
+                                        Click="ServiceHandler"
+                                        Tag="Start"
+                                        Text="Starten">
+                                    </MenuFlyoutItem>
+                                    <MenuFlyoutItem
+                                        Click="ServiceHandler"
+                                        Tag="Stop"
+                                        Text="Beenden">
+                                    </MenuFlyoutItem>
+                                    <MenuFlyoutItem
+                                        Click="ServiceHandler"
+                                        Tag="Pause"
+                                        Text="Anhalten">
+                                    </MenuFlyoutItem>
+                                    <MenuFlyoutItem
+                                        Click="ServiceHandler"
+                                        Tag="Restart"
+                                        Text="Neu starten">
+                                    </MenuFlyoutItem>
+                                </MenuFlyout>
+                            </Grid.ContextFlyout>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
                 <!--<ListView.ItemContainerStyle>
                     <Style
                         TargetType="ListViewItem">

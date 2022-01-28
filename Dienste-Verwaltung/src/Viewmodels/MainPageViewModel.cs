@@ -10,11 +10,21 @@ using System.Runtime.CompilerServices;
 using Microsoft.UI.Xaml.Controls;
 using ListViewHeaderItem = Dienste_Verwaltung.src.UserControls.ListViewHeaderItem;
 using System.Collections.Generic;
+using System.ServiceProcess;
 
 namespace Dienste_Verwaltung.src.Viewmodels
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
+        private Dictionary<string, Action<ServiceController>> serviceFunctions = new()
+        {
+            { "Start", (ServiceController s1) => { s1.Start(); } },
+            { "Stop", (ServiceController s1) => { s1.Stop(); } },
+            { "Pause", (ServiceController s1) => { s1.Pause(); } },
+            { "Continue", (ServiceController s1) => { s1.Continue(); } },
+            { "Restart", (ServiceController s1) => { s1.Refresh(); } }
+        };
+
         private Dictionary<string, Func<ServiceItem, string>> orderFunctions = new()
         {
             {"Anzeigename", (ServiceItem s1) => { return s1.Service.DisplayName; }  },
@@ -107,5 +117,18 @@ namespace Dienste_Verwaltung.src.Viewmodels
             }
             NotifyPropertyChanged(nameof(Services));
         }
+
+        public void HandleServiceOperation(ServiceController service, string operation, Action<string> notifyUserFunction)
+        {
+            try
+            {
+                serviceFunctions[operation](service);
+            }
+            catch (Exception e)
+            {
+                notifyUserFunction(e.Message);
+            }
+        }
+
     }
 }
