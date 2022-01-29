@@ -209,4 +209,109 @@
             </VisualStateManager.VisualStateGroups>
         </Grid>
     </ControlTemplate>
+
+    <ControlTemplate
+        TargetType="Button" x:Key="IconButtonTemplate">
+        <Grid
+            x:Name="ButtonGrid"
+            Background="{TemplateBinding Background}"
+            BackgroundSizing="{TemplateBinding BackgroundSizing}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            CornerRadius="{TemplateBinding CornerRadius}"
+            Padding="{TemplateBinding Padding}"
+            AutomationProperties.AccessibilityView="Raw">
+
+            <Viewbox>
+                <Path
+                    x:Name="ButtonIcon"
+                    Fill="{TemplateBinding Foreground}"
+                    Data="{TemplateBinding Content}" />
+            </Viewbox>
+
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup
+                    x:Name="CommonStates">
+                    <VisualState
+                        x:Name="Normal">
+
+                        <Storyboard>
+                            <PointerUpThemeAnimation
+                                Storyboard.TargetName="ButtonGrid" />
+                        </Storyboard>
+                    </VisualState>
+
+                    <VisualState
+                        x:Name="PointerOver">
+
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames
+                                Storyboard.TargetName="ButtonGrid"
+                                Storyboard.TargetProperty="Background">
+                                <DiscreteObjectKeyFrame
+                                    KeyTime="0"
+                                    Value="{ThemeResource SecondaryBackgroundHover}" />
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames
+                                Storyboard.TargetName="ButtonIcon"
+                                Storyboard.TargetProperty="Fill">
+                                <DiscreteObjectKeyFrame
+                                    KeyTime="0"
+                                    Value="{ThemeResource SecondaryForegroundHover}" />
+                            </ObjectAnimationUsingKeyFrames>
+                            <PointerUpThemeAnimation
+                                Storyboard.TargetName="ButtonGrid" />
+                        </Storyboard>
+                    </VisualState>
+
+                    <VisualState
+                        x:Name="Pressed">
+
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames
+                                Storyboard.TargetName="ButtonGrid"
+                                Storyboard.TargetProperty="Background">
+                                <DiscreteObjectKeyFrame
+                                    KeyTime="0"
+                                    Value="{ThemeResource SecondaryBackgroundPressed}" />
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames
+                                Storyboard.TargetName="ButtonIcon"
+                                Storyboard.TargetProperty="Fill">
+                                <DiscreteObjectKeyFrame
+                                    KeyTime="0"
+                                    Value="{ThemeResource SecondaryForegroundPressed}" />
+                            </ObjectAnimationUsingKeyFrames>
+                            <PointerDownThemeAnimation
+                                Storyboard.TargetName="ButtonGrid" />
+                        </Storyboard>
+                    </VisualState>
+
+                    <VisualState
+                        x:Name="Disabled">
+
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames
+                                Storyboard.TargetName="ButtonGrid"
+                                Storyboard.TargetProperty="Background">
+                                <DiscreteObjectKeyFrame
+                                    KeyTime="0"
+                                    Value="{ThemeResource SecondaryBackgroundDisabled}" />
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames
+                                Storyboard.TargetName="ButtonIcon"
+                                Storyboard.TargetProperty="Fill">
+                                <DiscreteObjectKeyFrame
+                                    KeyTime="0"
+                                    Value="{ThemeResource SecondaryForegroundDisabled}" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+
+                </VisualStateGroup>
+
+            </VisualStateManager.VisualStateGroups>
+        </Grid>
+    </ControlTemplate>
+
 </ResourceDictionary>

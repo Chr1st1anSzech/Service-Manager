@@ -3,6 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--#region colors -->
+    
+    
+    
     <!--#region accent -->
     <Color
         x:Key="AccentColor">#5fb2f2</Color>
@@ -15,6 +18,9 @@
     <!--#region borders -->
     <Color
         x:Key="BorderColor">#525252</Color>
+
+    <Color
+        x:Key="BorderColorDisabled">Transparent</Color>
     <!--#endregion-->
 
 
@@ -34,6 +40,11 @@
         x:Key="PrimaryBackgroundPressedColor">#2f2f2f</Color>
     <Color
         x:Key="SecondaryBackgroundPressedColor">#272727</Color>
+
+    <Color
+        x:Key="PrimaryBackgroundDisabledColor">#272727</Color>
+    <Color
+        x:Key="SecondaryBackgroundDisabledColor">#202020</Color>
     <!--#endregion-->
 
 
@@ -42,9 +53,9 @@
     <Color
         x:Key="ForegroundColor">#f1f1f1</Color>
     <Color
-        x:Key="SecondaryForegroundColor">#c0c0c0</Color>
+        x:Key="SecondaryForegroundColor">#f1f1f1</Color>
     <Color
-        x:Key="TertiaryForegroundColor">#f1f1f1</Color>
+        x:Key="TertiaryForegroundColor">#8c8c8c</Color>
     <Color
         x:Key="AccentForegroundColor">#5fb2f2</Color>
 
@@ -60,11 +71,13 @@
         x:Key="SecondaryForegroundPressedColor">#cecece</Color>
 
     <Color
-        x:Key="PrimaryForegroundDisabledColor">#000000</Color>
+        x:Key="PrimaryForegroundDisabledColor">#909090</Color>
     <Color
-        x:Key="SecondaryForegroundDisabledColor">#000000</Color>
+        x:Key="SecondaryForegroundDisabledColor">#909090</Color>
     <!--#endregion-->
 
+    
+    
     <!--#endregion-->
 
     <!--#region my brushes-->
@@ -109,6 +122,13 @@
     <SolidColorBrush
         x:Key="SecondaryBackgroundPressed"
         Color="{StaticResource SecondaryBackgroundPressedColor}" />
+
+    <SolidColorBrush
+        x:Key="PrimaryBackgroundDisabled"
+        Color="{StaticResource PrimaryBackgroundDisabledColor}" />
+    <SolidColorBrush
+        x:Key="SecondaryBackgroundDisabled"
+        Color="{StaticResource SecondaryBackgroundDisabledColor}" />
     <!--#endregion-->
 
 
@@ -161,6 +181,15 @@
     <SolidColorBrush
         x:Key="ButtonBackgroundPressed"
         Color="{StaticResource SecondaryBackgroundPressedColor}" />
+    <SolidColorBrush
+        x:Key="ButtonBackgroundDisabled"
+        Color="{StaticResource SecondaryBackgroundDisabled}" /> 
+    <SolidColorBrush
+        x:Key="ButtonBorderBrushDisabled"
+        Color="{StaticResource BorderColorDisabled}" />
+    <SolidColorBrush
+        x:Key="ButtonForegroundDisabled"
+        Color="{StaticResource SecondaryForegroundDisabledColor}" />  
     <!--<SolidColorBrush
         x:Key="ButtonBorderBrushPointerOver"
         Color="{StaticResource BorderColor}" />

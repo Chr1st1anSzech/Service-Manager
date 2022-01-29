@@ -7,7 +7,6 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Microsoft.UI.Xaml.Controls;
 using ListViewHeaderItem = Dienste_Verwaltung.src.UserControls.ListViewHeaderItem;
 using System.Collections.Generic;
 using System.ServiceProcess;
@@ -96,13 +95,25 @@ namespace Dienste_Verwaltung.src.Viewmodels
 
         public  void OnNavigatedTo()
         {
-            ServiceItem.FillServices(Services);
-            new ServiceGroupsReader().FillServiceGroups(ServiceGroups, Services);
+            FillServiceList();
         }
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void FillServiceList()
+        {
+            Services.Clear();
+            ServiceGroups.Clear();
+            ServiceItem.FillServices(Services);
+            new ServiceGroupsReader().FillServiceGroups(ServiceGroups, Services);
+        }
+
+        internal void RefreshView()
+        {
+            FillServiceList();
         }
 
         public void SortList(string orderIdentifier, int sortOrder)
@@ -126,7 +137,7 @@ namespace Dienste_Verwaltung.src.Viewmodels
             }
             catch (Exception e)
             {
-                notifyUserFunction(e.Message);
+                notifyUserFunction($"{e.InnerException?.Message} - {e.Message}");
             }
         }
 

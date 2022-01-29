@@ -1,4 +1,5 @@
-﻿using Dienste_Verwaltung.src.DataModels;
+﻿using Dienste_Verwaltung.src.Controller;
+using Dienste_Verwaltung.src.DataModels;
 using Dienste_Verwaltung.src.Viewmodels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -96,8 +97,12 @@ namespace Dienste_Verwaltung.src.Views
                 XamlRoot = ServiceListView.XamlRoot
                 
             };
-            
             await noWifiDialog.ShowAsync();
+        }
+
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.RefreshView();
         }
     }
 }

@@ -71,9 +71,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\Converter\" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="src\Styles\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

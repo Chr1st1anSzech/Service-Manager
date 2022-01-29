@@ -59,13 +59,13 @@
                 Value="12" />
             <Setter
                 Property="Foreground"
-                Value="{ThemeResource SecondaryForeground}" />
+                Value="{ThemeResource TertiaryForeground}" />
             <Setter
                 Property="Padding"
                 Value="6,12,0,0" />
         </Style.Setters>
     </Style>
-  
+
     <Style
         TargetType="toolkit:GridSplitter">
         <Setter
@@ -97,19 +97,7 @@
             Value="{StaticResource GridSplitterTemplate}">
         </Setter>
     </Style>
-  
-    <Style
-        TargetType="Path">
-        <Style.Setters>
-            <Setter
-                Property="Fill"
-                Value="{ThemeResource TertiaryForeground}" />
-            <Setter
-                Property="VerticalAlignment"
-                Value="Center" />
-        </Style.Setters>
-    </Style>
- 
+
     <Style
         TargetType="AppBarSeparator">
         <Style.Setters>
@@ -144,6 +132,12 @@
             <Setter
                 Property="BorderBrush"
                 Value="Transparent" />
+            <Setter
+                Property="Foreground"
+                Value="{ThemeResource SecondaryForeground}" />
+            <Setter
+                Property="Template"
+                Value="{StaticResource IconButtonTemplate}" />
         </Style.Setters>
     </Style>
     

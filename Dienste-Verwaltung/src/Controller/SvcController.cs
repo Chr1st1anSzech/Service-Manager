@@ -7,8 +7,17 @@ using System.Threading.Tasks;
 
 namespace Dienste_Verwaltung.src.Controller
 {
-    internal class SvcController
+    public class SvcController
     {
+        public enum Operations
+        {
+            Start,
+            Stop,
+            Pause,
+            Restart,
+            Cotninue
+        }
+
         public void StartService(ServiceController service)
         {
             service.Start();
