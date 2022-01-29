@@ -15,7 +15,8 @@
     <None Remove="service-groups.json" />
     <None Remove="src\Assets\icon.ico" />
     <None Remove="src\Assets\icon.png" />
-    <None Remove="src\Styles\Styles.xaml" />
+    <None Remove="src\Ressources\Icons.xaml" />
+    <None Remove="src\Ressources\Styles.xaml" />
     <None Remove="src\UserControls\ListViewHeaderItem.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +60,11 @@
        package has not yet been restored -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnablePreviewMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="src\Ressources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Themes\Generic.xaml">

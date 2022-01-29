@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using ListViewHeaderItem = Dienste_Verwaltung.src.UserControls.ListViewHeaderItem;
 using System.Collections.Generic;
 using System.ServiceProcess;
+using Dienste_Verwaltung.src.Controller;
 
 namespace Dienste_Verwaltung.src.Viewmodels
 {
@@ -17,11 +18,11 @@ namespace Dienste_Verwaltung.src.Viewmodels
     {
         private Dictionary<string, Action<ServiceController>> serviceFunctions = new()
         {
-            { "Start", (ServiceController s1) => { s1.Start(); } },
-            { "Stop", (ServiceController s1) => { s1.Stop(); } },
-            { "Pause", (ServiceController s1) => { s1.Pause(); } },
-            { "Continue", (ServiceController s1) => { s1.Continue(); } },
-            { "Restart", (ServiceController s1) => { s1.Refresh(); } }
+            { "Start", (ServiceController s1) => { SvcController.StartService(s1); } },
+            { "Stop", (ServiceController s1) => { SvcController.StopService(s1); } },
+            { "Pause", (ServiceController s1) => { SvcController.PauseService(s1); } },
+            { "Continue", (ServiceController s1) => { SvcController.ContinueService(s1); } },
+            { "Restart", (ServiceController s1) => { SvcController.RestartService(s1); } }
         };
 
         private Dictionary<string, Func<ServiceItem, string>> orderFunctions = new()

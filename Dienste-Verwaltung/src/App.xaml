@@ -22,11 +22,11 @@
 
                 <!-- Other merged dictionaries here -->
                 <ResourceDictionary
-                    Source="ms-appx:///src/Styles/Numbers.xaml" />
+                    Source="ms-appx:///src/Ressources/Icons.xaml" />
                 <ResourceDictionary
-                    Source="ms-appx:///src/Styles/Styles.xaml" />
+                    Source="ms-appx:///src/Ressources/Styles.xaml" />
                 <ResourceDictionary
-                    Source="ms-appx:///src/Styles/Templates.xaml" />
+                    Source="ms-appx:///src/Ressources/Templates.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->

@@ -18,12 +18,12 @@ namespace Dienste_Verwaltung.src.Controller
             Cotninue
         }
 
-        public void StartService(ServiceController service)
+        public static void StartService(ServiceController service)
         {
             service.Start();
         }
 
-        public void StopService(ServiceController service)
+        public static void StopService(ServiceController service)
         {
             if (service.CanStop)
             {
@@ -31,7 +31,7 @@ namespace Dienste_Verwaltung.src.Controller
             }
         }
 
-        public void ContinueService(ServiceController service)
+        public static void ContinueService(ServiceController service)
         {
             if (service.CanPauseAndContinue)
             {
@@ -39,16 +39,26 @@ namespace Dienste_Verwaltung.src.Controller
             }
         }
 
-        public void PauseService(ServiceController service)
+        public static void PauseService(ServiceController service)
         {
             if (service.CanPauseAndContinue)
             {
                 service.Pause();
             }
         }
-        public void RestartService(ServiceController service)
+
+        public static void RestartService(ServiceController service)
         {
-            service.Refresh();
+            StopService(service);
+            try
+            {
+                service.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromSeconds(10d));
+                StartService(service);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
     }
