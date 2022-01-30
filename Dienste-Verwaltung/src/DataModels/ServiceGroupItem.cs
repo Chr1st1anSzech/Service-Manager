@@ -11,15 +11,11 @@ namespace Dienste_Verwaltung.src.DataModels
     public class ServiceGroupItem : INotifyPropertyChanged
     {
         public string GroupName { get; set; }
-        private ObservableCollection<ServiceItem> services;
+        private ObservableCollection<ServiceItem> services = new();
         public ObservableCollection<ServiceItem> Services
         {
             get
             {
-                if (services == null)
-                {
-                    services = new ObservableCollection<ServiceItem>();
-                }
                 return services;
             }
             set
@@ -36,6 +32,10 @@ namespace Dienste_Verwaltung.src.DataModels
 
         public ServiceGroupItem() { }
 
+        public ServiceGroupItem(string name)
+        {
+            GroupName = name;
+        }
         public ServiceGroupItem(string name, IEnumerable<ServiceItem> services)
         {
             GroupName = name;

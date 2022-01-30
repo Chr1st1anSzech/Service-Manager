@@ -11,6 +11,7 @@ using ListViewHeaderItem = Dienste_Verwaltung.src.UserControls.ListViewHeaderIte
 using System.Collections.Generic;
 using System.ServiceProcess;
 using Dienste_Verwaltung.src.Controller;
+using Dienste_Verwaltung.src.Views;
 
 namespace Dienste_Verwaltung.src.Viewmodels
 {
@@ -142,5 +143,17 @@ namespace Dienste_Verwaltung.src.Viewmodels
             }
         }
 
+        public string[] GetGroupNames()
+        {
+            return ServiceGroups.Select(group => group.GroupName).ToArray();
+        }
+
+        public void CreateNewGroup(string groupName)
+        {
+            if(groupName != null)
+            {
+                ServiceGroups.Add(new ServiceGroupItem(groupName));
+            }
+        }
     }
 }

@@ -18,6 +18,7 @@
     <None Remove="src\Ressources\Icons.xaml" />
     <None Remove="src\Ressources\Styles.xaml" />
     <None Remove="src\UserControls\ListViewHeaderItem.xaml" />
+    <None Remove="src\Views\TextInputDialog.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Page Remove="src\App.xaml" />
@@ -60,6 +61,11 @@
        package has not yet been restored -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnablePreviewMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="src\Views\TextInputDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="src\Ressources\Icons.xaml">

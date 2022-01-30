@@ -174,30 +174,6 @@
 
     <!--#region overwrite brushes -->
 
-    <!--#region button brushes -->
-    <SolidColorBrush
-        x:Key="ButtonBackgroundPointerOver"
-        Color="{StaticResource SecondaryBackgroundHoverColor}" />
-    <SolidColorBrush
-        x:Key="ButtonBackgroundPressed"
-        Color="{StaticResource SecondaryBackgroundPressedColor}" />
-    <SolidColorBrush
-        x:Key="ButtonBackgroundDisabled"
-        Color="{StaticResource SecondaryBackgroundDisabled}" /> 
-    <SolidColorBrush
-        x:Key="ButtonBorderBrushDisabled"
-        Color="{StaticResource BorderColorDisabled}" />
-    <SolidColorBrush
-        x:Key="ButtonForegroundDisabled"
-        Color="{StaticResource SecondaryForegroundDisabledColor}" />  
-    <!--<SolidColorBrush
-        x:Key="ButtonBorderBrushPointerOver"
-        Color="{StaticResource BorderColor}" />
-    <SolidColorBrush
-        x:Key="ButtonBorderBrushPressed"
-        Color="{StaticResource BorderColor}" />-->
-    <!--#endregion-->
-
     <!--#region  window caption -->
     <SolidColorBrush
         x:Key="WindowCaptionBackground"
