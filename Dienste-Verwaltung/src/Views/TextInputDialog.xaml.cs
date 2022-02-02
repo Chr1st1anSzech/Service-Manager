@@ -34,5 +34,13 @@ namespace Dienste_Verwaltung.src.Views
                 IsPrimaryButtonEnabled = false;
             }
         }
+
+        private void GroupTextBox_KeyUp(object sender, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if( e.Key == Windows.System.VirtualKey.Enter)
+            {
+
+            }
+        }
     }
 }

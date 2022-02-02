@@ -75,7 +75,16 @@
                     x:Name="DeleteGroupButton"
                     AccessKey="D"
                     Style="{StaticResource IconButton}"
+                    IsEnabled="{Binding ElementName=GroupsTreeView, Path=SelectedItem, Converter={StaticResource ObjectToBoolConverter} }"
                     Content="{StaticResource DeleteGroupIconData}" />
+
+                <Button
+                    x:Name="AddToGroupButton"
+                    AccessKey="A"
+                    Style="{StaticResource IconButton}"
+                    Click="AddToGroupButton_Click"
+                    IsEnabled="{Binding ElementName=GroupsTreeView, Path=SelectedItem,Converter={StaticResource ObjectToBoolConverter} }"
+                    Content="{StaticResource AddToGroupIconData}" />
 
                 <AppBarSeparator />
 
@@ -128,7 +137,7 @@
                 <Button
                     x:Name="InfoButton"
                     AccessKey="I"
-                    IsEnabled="{Binding SelectedServiceItem,Converter={StaticResource ObjectToBoolConverter} }"
+                    IsEnabled="{Binding ElementName=ServiceListView, Path=SelectedItem,Converter={StaticResource ObjectToBoolConverter} }"
                     Style="{StaticResource IconButton}"
                     Content="{StaticResource InfoIconData}"/>
 
@@ -161,7 +170,7 @@
                     <TreeViewItem
                         AutomationProperties.Name="{Binding GroupName}"
                         Margin="0,16,0,0"
-                        CanDrag="False"
+                        AllowDrop="True"
                         ItemsSource="{Binding Services}"
                         Template="{StaticResource TreeViewControlTemplate}"
                         IsExpanded="True">
@@ -182,7 +191,7 @@
                     <TreeViewItem
                         HorizontalAlignment="Stretch"
                         Margin="0"
-                        AllowDrop="False"
+                        AllowDrop="True"
                         CollapsedGlyph=""
                         ExpandedGlyph=""
                         HorizontalContentAlignment="Stretch"
@@ -221,6 +230,8 @@
                     ScrollViewer.HorizontalScrollMode="Enabled"
                     ScrollViewer.HorizontalScrollBarVisibility="Visible"
                     ItemsSource="{Binding ServiceGroups}"
+                    AllowDrop="True"
+                    x:Name="GroupsTreeView"
                     ItemTemplateSelector="{StaticResource GroupServiceItemTemplateSelector}">
                     <TreeView.ItemContainerStyle>
                         <Style
@@ -229,6 +240,9 @@
                                 <Setter
                                     Property="HorizontalContentAlignment"
                                     Value="Stretch" />
+                                <Setter
+                                    Property="AllowDrop"
+                                    Value="True" />
                                 <Setter
                                     Property="HorizontalAlignment"
                                     Value="Stretch" />
@@ -339,6 +353,7 @@
                 ItemsSource="{Binding Services}"
                 SelectionMode="Extended"
                 x:Name="ServiceListView"
+                CanDragItems="True"
                 SelectionChanged="ServiceListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>

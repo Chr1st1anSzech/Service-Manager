@@ -41,5 +41,15 @@ namespace Dienste_Verwaltung.src.DataModels
             GroupName = name;
             Services = new ObservableCollection<ServiceItem>(Services.Concat(services));
         }
+
+        public bool AddService(ServiceItem service)
+        {
+            if( !Services.Contains(service))
+            {
+                Services.Add(service);
+                return true;
+            }
+            return false;
+        }
     }
 }

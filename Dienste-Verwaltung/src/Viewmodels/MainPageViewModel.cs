@@ -12,12 +12,13 @@ using System.Collections.Generic;
 using System.ServiceProcess;
 using Dienste_Verwaltung.src.Controller;
 using Dienste_Verwaltung.src.Views;
+using System.Text;
 
 namespace Dienste_Verwaltung.src.Viewmodels
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
-        private Dictionary<string, Action<ServiceController>> serviceFunctions = new()
+        private readonly Dictionary<string, Action<ServiceController>> serviceFunctions = new()
         {
             { "Start", (ServiceController s1) => { SvcController.StartService(s1); } },
             { "Stop", (ServiceController s1) => { SvcController.StopService(s1); } },
@@ -26,7 +27,7 @@ namespace Dienste_Verwaltung.src.Viewmodels
             { "Restart", (ServiceController s1) => { SvcController.RestartService(s1); } }
         };
 
-        private Dictionary<string, Func<ServiceItem, string>> orderFunctions = new()
+        private readonly Dictionary<string, Func<ServiceItem, string>> orderFunctions = new()
         {
             {"Anzeigename", (ServiceItem s1) => { return s1.Service.DisplayName; }  },
             {"Dienstname", (ServiceItem s1) => { return s1.ServiceName; }  },
@@ -131,16 +132,9 @@ namespace Dienste_Verwaltung.src.Viewmodels
             NotifyPropertyChanged(nameof(Services));
         }
 
-        public void HandleServiceOperation(ServiceController service, string operation, Action<string> notifyUserFunction)
+        public void HandleServiceOperation(ServiceController service, string operation)
         {
-            try
-            {
-                serviceFunctions[operation](service);
-            }
-            catch (Exception e)
-            {
-                notifyUserFunction($"{e.InnerException?.Message} - {e.Message}");
-            }
+            serviceFunctions[operation](service);
         }
 
         public string[] GetGroupNames()
@@ -153,7 +147,25 @@ namespace Dienste_Verwaltung.src.Viewmodels
             if(groupName != null)
             {
                 ServiceGroups.Add(new ServiceGroupItem(groupName));
+                new ServiceGroupsWriter().WriteServiceGroups(ServiceGroups);
             }
+        }
+
+        public void AddToGroup(ServiceGroupItem group, IEnumerable<ServiceItem> services, out string notAddedServiceNames)
+        {
+            notAddedServiceNames = "";
+            if (group == null || !services.Any()) return;
+
+            StringBuilder builder = new();
+            foreach (ServiceItem service in services)
+            {
+                if (!group.AddService(service))
+                {
+                    builder.Append($"\n\u2012 {service.ServiceName}");
+                }
+            }
+            notAddedServiceNames = builder.ToString();
+            new ServiceGroupsWriter().WriteServiceGroups(ServiceGroups);
         }
     }
 }

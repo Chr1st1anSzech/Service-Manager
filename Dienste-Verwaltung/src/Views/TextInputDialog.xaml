@@ -21,6 +21,7 @@
             TextWrapping="Wrap" />
         <TextBox
             x:Name="GroupTextBox"
+            KeyUp="GroupTextBox_KeyUp"
             TextChanged="GroupTextBox_TextChanged" />
     </StackPanel>
 

@@ -4,6 +4,10 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Text;
+using Windows.ApplicationModel.DataTransfer;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -23,7 +27,7 @@ namespace Dienste_Verwaltung.src.Views
 
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -64,7 +68,17 @@ namespace Dienste_Verwaltung.src.Views
         {
             if (sender is FrameworkElement control && ServiceListView.SelectedItem is ServiceItem serviceItem)
             {
-                ViewModel.HandleServiceOperation(serviceItem.Service, control.Tag.ToString(), NotifyUser);
+                try
+                {
+                    ViewModel.HandleServiceOperation(serviceItem.Service, control.Tag.ToString());
+                }
+                catch (Exception ex)
+                {
+                    ShowDefaultDialog("Aktion fehlgeschlagen",
+                        $"Die angeforderte Aktion konnte nicht durchgeführt werden. Grund:\n\n{ex.InnerException?.Message} - {ex.Message}",
+                        "Ok");
+                }
+                
             }
         }
 
@@ -74,19 +88,6 @@ namespace Dienste_Verwaltung.src.Views
             {
                 ServiceListView.SelectedItem = menueFlyout.Target.DataContext;
             }
-        }
-
-        private async void NotifyUser(string reason)
-        {
-            ContentDialog noWifiDialog = new()
-            {
-                Title = "Aktion fehlgeschlagen",
-                Content = $"Die angeforderte Aktion konnte nicht durchgeführt werden. Grund:\n\n{reason}",
-                CloseButtonText = "Ok",
-                XamlRoot = ServiceListView.XamlRoot
-                
-            };
-            await noWifiDialog.ShowAsync();
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
@@ -100,6 +101,35 @@ namespace Dienste_Verwaltung.src.Views
             dialog.XamlRoot = ServiceListView.XamlRoot;
             await dialog.ShowAsync();
             ViewModel.CreateNewGroup(dialog.Result);
+        }
+
+        private async void ShowDefaultDialog(string title, string content, string close)
+        {
+            ContentDialog serviceNotAddDialog = new()
+            {
+                Title = title,
+                Content = content,
+                CloseButtonText = close,
+                XamlRoot = ServiceListView.XamlRoot
+
+            };
+            await serviceNotAddDialog.ShowAsync();
+        }
+
+        private void AddToGroupButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(GroupsTreeView.SelectedItem is ServiceGroupItem group)
+            {
+                IEnumerable<ServiceItem> services = ServiceListView.SelectedItems.Cast<ServiceItem>();
+                ViewModel.AddToGroup(group, services, out string notAddedServiceNames);
+
+                if(!string.IsNullOrEmpty(notAddedServiceNames))
+                {
+                    ShowDefaultDialog("Hinzufügen fehlgeschlagen",
+                        $"Diese Services sind bereits in der Gruppe enthalten und können nicht erneut hinzugefügt werden: {notAddedServiceNames}",
+                        "Ok");
+                }
+            }
         }
     }
 }
