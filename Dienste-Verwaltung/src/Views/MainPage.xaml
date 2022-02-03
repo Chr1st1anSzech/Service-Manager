@@ -102,7 +102,7 @@
                     AccessKey="S"
                     Click="ServiceHandler"
                     Tag="Start"
-                    IsEnabled="{Binding SelectedServiceItem.Service,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Start, FallbackValue=false }"
+                    IsEnabled="{Binding ElementName=ServiceListView, Path=SelectedItem.ServiceController,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Start, FallbackValue=false }"
                     Style="{StaticResource IconButton}"
                     Content="{StaticResource StartIconData}"/>
 
@@ -111,7 +111,7 @@
                     AccessKey="P"
                     Click="ServiceHandler"
                     Tag="Pause"
-                    IsEnabled="{Binding SelectedServiceItem.Service,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Pause, FallbackValue=false }"
+                    IsEnabled="{Binding ElementName=ServiceListView, Path=SelectedItem.ServiceController,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Pause, FallbackValue=false }"
                     Style="{StaticResource IconButton}"
                     Content="{StaticResource PauseIconData}"/>
 
@@ -119,7 +119,7 @@
                     x:Name="StopButton"
                     Click="ServiceHandler"
                     Tag="Stop"
-                    IsEnabled="{Binding SelectedServiceItem.Service,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Stop, FallbackValue=false }"
+                    IsEnabled="{Binding ElementName=ServiceListView, Path=SelectedItem.ServiceController,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Stop, FallbackValue=false }"
                     AccessKey="T"
                     Style="{StaticResource IconButton}"
                     Content="{StaticResource StopIconData}"/>
@@ -128,7 +128,7 @@
                     x:Name="RestartButton"
                     Click="ServiceHandler"
                     Tag="Restart"
-                    IsEnabled="{Binding SelectedServiceItem.Service,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Restart, FallbackValue=false }"
+                    IsEnabled="{Binding ElementName=ServiceListView, Path=SelectedItem.ServiceController,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Restart, FallbackValue=false }"
                     AccessKey="R"
                     Style="{StaticResource IconButton}"
                     Content="{StaticResource RestartIconData}"/>
@@ -166,7 +166,7 @@
             <Grid.Resources>
                 <DataTemplate
                     x:Key="GroupTemplate"
-                    x:DataType="datatmodel:ServiceGroupItem">
+                    x:DataType="datatmodel:ServiceGroup">
                     <TreeViewItem
                         AutomationProperties.Name="{Binding GroupName}"
                         Margin="0,16,0,0"
@@ -187,7 +187,7 @@
 
                 <DataTemplate
                     x:Key="ServiceTemplate"
-                    x:DataType="datatmodel:ServiceItem">
+                    x:DataType="datatmodel:Service">
                     <TreeViewItem
                         HorizontalAlignment="Stretch"
                         Margin="0"
@@ -229,7 +229,7 @@
                 <TreeView
                     ScrollViewer.HorizontalScrollMode="Enabled"
                     ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                    ItemsSource="{Binding ServiceGroups}"
+                    ItemsSource="{Binding ServiceGroups.Collection}"
                     AllowDrop="True"
                     x:Name="GroupsTreeView"
                     ItemTemplateSelector="{StaticResource GroupServiceItemTemplateSelector}">
@@ -350,7 +350,7 @@
             BorderBrush="{ThemeResource Border}"
             BorderThickness="0,0,0,0">
             <ListView
-                ItemsSource="{Binding Services}"
+                ItemsSource="{Binding Services.Collection}"
                 SelectionMode="Extended"
                 x:Name="ServiceListView"
                 CanDragItems="True"
@@ -385,19 +385,19 @@
                                 Source="ms-appx:///src/Assets/icon.ico" />
                             <TextBlock
                                 Grid.Column="1"
-                                Text="{Binding Service.DisplayName}"
+                                Text="{Binding ServiceController.DisplayName}"
                                 Style="{StaticResource PrimaryTextBlock}" />
                             <TextBlock
                                 Grid.Column="2"
-                                Text="{Binding Service.ServiceName}"
+                                Text="{Binding ServiceController.ServiceName}"
                                 Style="{StaticResource SecondaryTextBlock}" />
                             <TextBlock
                                 Grid.Column="3"
-                                Text="{Binding Service.Status}"
+                                Text="{Binding ServiceController.Status}"
                                 Style="{StaticResource SecondaryTextBlock}" />
                             <TextBlock
                                 Grid.Column="4"
-                                Text="{Binding Service.StartType}"
+                                Text="{Binding ServiceController.StartType}"
                                 Style="{StaticResource SecondaryTextBlock}" />
                             <TextBlock
                                 Grid.Column="5"
@@ -410,7 +410,7 @@
                                     <MenuFlyoutItem
                                         Click="ServiceHandler"
                                         Tag="Start"
-                                        IsEnabled="{Binding Service,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Start }"
+                                        IsEnabled="{Binding ServiceController,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Start }"
                                         Text="Starten">
                                         <MenuFlyoutItem.Icon>
                                             <PathIcon
@@ -421,7 +421,7 @@
                                     <MenuFlyoutItem
                                         Click="ServiceHandler"
                                         Tag="Stop"
-                                        IsEnabled="{Binding Service,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Stop }"
+                                        IsEnabled="{Binding ServiceController,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Stop }"
                                         Text="Beenden">
                                         <MenuFlyoutItem.Icon>
                                             <PathIcon
@@ -432,7 +432,7 @@
                                     <MenuFlyoutItem
                                         Click="ServiceHandler"
                                         Tag="Pause"
-                                        IsEnabled="{Binding Service,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Pause }"
+                                        IsEnabled="{Binding ServiceController,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Pause }"
                                         Text="Anhalten">
                                         <MenuFlyoutItem.Icon>
                                             <PathIcon
@@ -443,7 +443,7 @@
                                     <MenuFlyoutItem
                                         Click="ServiceHandler"
                                         Tag="Restart"
-                                        IsEnabled="{Binding Service,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Restart }"
+                                        IsEnabled="{Binding ServiceController,Converter={StaticResource ServiceToIsEnabledConverter}, ConverterParameter=Restart }"
                                         Text="Neu starten">
                                         <MenuFlyoutItem.Icon>
                                             <PathIcon
@@ -510,7 +510,7 @@
                     FontFamily="Segoe UI Semibold"
                     TextWrapping="WrapWholeWords"
                     Visibility="{Binding PreviewVisible}"
-                    Text="{Binding SelectedServiceItem.Service.DisplayName}" />
+                    Text="{Binding ElementName=ServiceListView, Path=SelectedItem.ServiceController.DisplayName}" />
                 <TextBlock
                     Foreground="{ThemeResource Foreground}"
                     TextWrapping="WrapWholeWords"
@@ -525,7 +525,7 @@
                     FontSize="12"
                     IsTextSelectionEnabled="True"
                     SelectionHighlightColor="{ThemeResource Accent}"
-                    Text="{Binding SelectedServiceItem.Path}"
+                    Text="{Binding ElementName=ServiceListView, Path=SelectedItem.Path}"
                     Visibility="{Binding PreviewVisible}" />
                 <TextBlock
                     Foreground="{ThemeResource Foreground}"
@@ -542,7 +542,7 @@
                     FontSize="12"
                     IsTextSelectionEnabled="True"
                     SelectionHighlightColor="{ThemeResource Accent}"
-                    Text="{Binding SelectedServiceItem.Description}"
+                    Text="{Binding ElementName=ServiceListView, Path=SelectedItem.Description}"
                     Visibility="{Binding PreviewVisible}" />
             </StackPanel>
         </ScrollViewer>

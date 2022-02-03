@@ -19,11 +19,18 @@ namespace Dienste_Verwaltung.src.Views
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        #region properties
+
+
         public MainPageViewModel ViewModel
         {
             get => (MainPageViewModel)DataContext;
             set => DataContext = value;
         }
+
+
+        #endregion
+
 
         public MainPage()
         {
@@ -37,9 +44,8 @@ namespace Dienste_Verwaltung.src.Views
 
         private void ServiceListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if( sender is ListView listView && listView.SelectedItem is ServiceItem serviceItem)
+            if( sender is ListView listView && listView.SelectedItem is Service serviceItem)
             {
-                ViewModel.SelectedServiceItem = serviceItem;
                 ViewModel.PreviewVisible = Visibility.Visible;
             }
             else
@@ -66,11 +72,11 @@ namespace Dienste_Verwaltung.src.Views
         }
         private void ServiceHandler(object sender, RoutedEventArgs e)
         {
-            if (sender is FrameworkElement control && ServiceListView.SelectedItem is ServiceItem serviceItem)
+            if (sender is FrameworkElement control && ServiceListView.SelectedItem is Service serviceItem)
             {
                 try
                 {
-                    ViewModel.HandleServiceOperation(serviceItem.Service, control.Tag.ToString());
+                    ViewModel.HandleServiceOperation(serviceItem.ServiceController, control.Tag.ToString());
                 }
                 catch (Exception ex)
                 {
@@ -92,7 +98,7 @@ namespace Dienste_Verwaltung.src.Views
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.RefreshView();
+            ViewModel.UpdateServiceItemSource();
         }
 
         private async void NewGroupButton_Click(object sender, RoutedEventArgs e)
@@ -118,9 +124,9 @@ namespace Dienste_Verwaltung.src.Views
 
         private void AddToGroupButton_Click(object sender, RoutedEventArgs e)
         {
-            if(GroupsTreeView.SelectedItem is ServiceGroupItem group)
+            if(GroupsTreeView.SelectedItem is ServiceGroup group)
             {
-                IEnumerable<ServiceItem> services = ServiceListView.SelectedItems.Cast<ServiceItem>();
+                IEnumerable<Service> services = ServiceListView.SelectedItems.Cast<Service>();
                 ViewModel.AddToGroup(group, services, out string notAddedServiceNames);
 
                 if(!string.IsNullOrEmpty(notAddedServiceNames))

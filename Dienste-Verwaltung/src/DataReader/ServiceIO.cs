@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Dienste_Verwaltung.src.DataReader
 {
-    public class ServiceGroupsIO
+    public class ServiceIO
     {
         protected readonly string filePath = Path.Combine(Util.GetApplicationRoot(), "service-groups.json");
     }

@@ -1,37 +1,26 @@
 ﻿using Dienste_Verwaltung.src.DataModels;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dienste_Verwaltung.src.DataReader
 {
-    public class ServiceGroupsWriter : ServiceGroupsIO
+    public class ServiceToFileWriter : ServiceIO, IServiceWriter
     {
-        public void WriteServiceGroups(ObservableCollection<ServiceGroupItem> serviceGroups)
+        public void WriteServiceGroups(ObservableCollection<ServiceGroup> serviceGroups)
         {
-            //try
-            //{
             string outputJson = JsonConvert.SerializeObject(SimplifyList(serviceGroups));
             File.WriteAllText(filePath, outputJson);
-            //}
-            //catch
-            //{
-
-            //}
         }
 
-        private SimpleServiceGroupItem[] SimplifyList(ObservableCollection<ServiceGroupItem> serviceGroups)
+        private SimpleServiceGroup[] SimplifyList(ObservableCollection<ServiceGroup> serviceGroups)
         {
-            SimpleServiceGroupItem[] groups = new SimpleServiceGroupItem[serviceGroups.Count];
+            SimpleServiceGroup[] groups = new SimpleServiceGroup[serviceGroups.Count];
             for (int i = 0; i < serviceGroups.Count; i++)
             {
-                ServiceGroupItem serviceGroupItem = serviceGroups[i];
-                groups[i] = new SimpleServiceGroupItem
+                ServiceGroup serviceGroupItem = serviceGroups[i];
+                groups[i] = new SimpleServiceGroup
                 {
                     GroupName = serviceGroupItem.GroupName,
                     ServiceNames = serviceGroupItem.Services.Select(service => service.ServiceName)

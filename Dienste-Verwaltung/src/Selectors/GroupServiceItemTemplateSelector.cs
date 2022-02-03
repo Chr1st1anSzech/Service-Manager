@@ -16,7 +16,7 @@ namespace Dienste_Verwaltung.src.Selectors
 
         protected override DataTemplate SelectTemplateCore(object item)
         {
-            if (item is ServiceGroupItem group)
+            if (item is ServiceGroup group)
             {
                 return GroupTemplate;
             }
