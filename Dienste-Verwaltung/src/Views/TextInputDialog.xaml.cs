@@ -1,46 +1,25 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using System;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using Dienste_Verwaltung.src.Validation;
+using Dienste_Verwaltung.src.Viewmodels;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 
 namespace Dienste_Verwaltung.src.Views
 {
     public sealed partial class TextInputDialog : ContentDialog
     {
-        public string Result { get; private set; }
+        public TextInputDialogViewModel ViewModel{get;set;}
 
-        private readonly string[] existingNames;
-
-        public TextInputDialog(string[] existingNames)
+        public TextInputDialog(XamlRoot root, string title, string description, string[] forbiddenInputs)
         {
+            ViewModel = new TextInputDialogViewModel(new Validator(Validator.OnlyCharsAndDash, forbiddenInputs))
+            {
+                Title = title,
+                Description = description
+            };
+            DataContext = ViewModel;
+            XamlRoot = root;
             InitializeComponent();
-            this.existingNames = existingNames;
-        }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-            Result = GroupTextBox.Text;
-        }
-
-        private void GroupTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string text = GroupTextBox.Text;
-            if (Regex.IsMatch(text, "^[a-zA-Z0-9]([a-zA-Z0-9_\\- ]*[a-zA-Z0-9]+)?$") && !existingNames.Contains(text))
-            {
-                IsPrimaryButtonEnabled = true;
-            }
-            else
-            {
-                IsPrimaryButtonEnabled = false;
-            }
-        }
-
-        private void GroupTextBox_KeyUp(object sender, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
-        {
-            if( e.Key == Windows.System.VirtualKey.Enter)
-            {
-
-            }
         }
     }
 }

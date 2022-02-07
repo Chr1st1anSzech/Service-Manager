@@ -5,24 +5,22 @@
     xmlns:local="using:Dienste_Verwaltung.src.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="using:Dienste_Verwaltung.src.Viewmodels"
+    d:DataContext="{d:DesignInstance Type=viewmodels:TextInputDialogViewModel}"
     mc:Ignorable="d"
-    Title="Neue Gruppe erstellen"
+    Title="{Binding Title}"
+    IsPrimaryButtonEnabled="{Binding IsPrimaryButtonEnabled}"
     PrimaryButtonText="OK"
-    IsPrimaryButtonEnabled="False"
-    CloseButtonText="Abbrechen"
-    PrimaryButtonClick="ContentDialog_PrimaryButtonClick">
+    CloseButtonText="Abbrechen">
 
     <StackPanel
         VerticalAlignment="Stretch"
         HorizontalAlignment="Stretch">
-        <!-- Content body -->
         <TextBlock
-            Text="Geben Sie den Namen der neuen Gruppe ein:"
+            Text="{Binding Description}"
             TextWrapping="Wrap" />
         <TextBox
-            x:Name="GroupTextBox"
-            KeyUp="GroupTextBox_KeyUp"
-            TextChanged="GroupTextBox_TextChanged" />
+            Text="{Binding InputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
     </StackPanel>
 
 </ContentDialog>

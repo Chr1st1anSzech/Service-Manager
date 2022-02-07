@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-namespace Dienste_Verwaltung.src.Controller
+namespace Dienste_Verwaltung.src.Service
 {
     public class ServiceGroups
     {
@@ -31,7 +31,7 @@ namespace Dienste_Verwaltung.src.Controller
         #region public methods
 
 
-        public void ReadFromStorage(ObservableCollection<Service> services)
+        public void ReadFromStorage(ObservableCollection<DataModels.Service> services)
         {
             SimpleServiceGroup[] simpleList = reader.ReadSimpleGroups();
             foreach (SimpleServiceGroup simpleItem in simpleList)
@@ -59,13 +59,13 @@ namespace Dienste_Verwaltung.src.Controller
         }
 
 
-        public void AddService(ServiceGroup group, IEnumerable<Service> services, out string notAddedServiceNames)
+        public void AddService(ServiceGroup group, IEnumerable<DataModels.Service> services, out string notAddedServiceNames)
         {
             notAddedServiceNames = "";
             if (group == null || !services.Any()) return;
 
             StringBuilder builder = new();
-            foreach (Service service in services)
+            foreach (DataModels.Service service in services)
             {
                 if (!group.AddService(service))
                 {

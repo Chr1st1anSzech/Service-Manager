@@ -5,9 +5,9 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dienste_Verwaltung.src.Controller
+namespace Dienste_Verwaltung.src.Service
 {
-    public class SvcController
+    public class ServiceOperations
     {
         public enum Operations
         {

@@ -66,9 +66,9 @@
 
                 <Button
                     x:Name="NewGroupButton"
+                    Command="{Binding NewGroupCommand}"
                     AccessKey="N"
                     Style="{StaticResource IconButton}"
-                    Click="NewGroupButton_Click"
                     Content="{StaticResource NewGroupIconData}" />
 
                 <Button
@@ -90,7 +90,7 @@
 
                 <Button
                     x:Name="RefreshButton"
-                    Click="RefreshButton_Click"
+                    Command="{Binding RefreshListCommand}"
                     AccessKey="F"
                     Style="{StaticResource IconButton}"
                     Content="{StaticResource RefreshIconData}" />

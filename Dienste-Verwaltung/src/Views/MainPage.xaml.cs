@@ -8,6 +8,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using Windows.ApplicationModel.DataTransfer;
+using Dienste_Verwaltung.src.Service;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -35,16 +36,18 @@ namespace Dienste_Verwaltung.src.Views
         public MainPage()
         {
             InitializeComponent();
+            Loaded += MainPage_Loaded;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            ViewModel.TextInputDialogService = new TextInputDialogService(ServiceListView.XamlRoot);
             ViewModel.OnNavigatedTo();
         }
 
         private void ServiceListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if( sender is ListView listView && listView.SelectedItem is Service serviceItem)
+            if( sender is ListView listView && listView.SelectedItem is DataModels.Service serviceItem)
             {
                 ViewModel.PreviewVisible = Visibility.Visible;
             }
@@ -72,7 +75,7 @@ namespace Dienste_Verwaltung.src.Views
         }
         private void ServiceHandler(object sender, RoutedEventArgs e)
         {
-            if (sender is FrameworkElement control && ServiceListView.SelectedItem is Service serviceItem)
+            if (sender is FrameworkElement control && ServiceListView.SelectedItem is DataModels.Service serviceItem)
             {
                 try
                 {
@@ -96,19 +99,6 @@ namespace Dienste_Verwaltung.src.Views
             }
         }
 
-        private void RefreshButton_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.UpdateServiceItemSource();
-        }
-
-        private async void NewGroupButton_Click(object sender, RoutedEventArgs e)
-        {
-            TextInputDialog dialog = new(ViewModel.GetGroupNames());
-            dialog.XamlRoot = ServiceListView.XamlRoot;
-            await dialog.ShowAsync();
-            ViewModel.CreateNewGroup(dialog.Result);
-        }
-
         private async void ShowDefaultDialog(string title, string content, string close)
         {
             ContentDialog serviceNotAddDialog = new()
@@ -126,7 +116,7 @@ namespace Dienste_Verwaltung.src.Views
         {
             if(GroupsTreeView.SelectedItem is ServiceGroup group)
             {
-                IEnumerable<Service> services = ServiceListView.SelectedItems.Cast<Service>();
+                IEnumerable<DataModels.Service> services = ServiceListView.SelectedItems.Cast<DataModels.Service>();
                 ViewModel.AddToGroup(group, services, out string notAddedServiceNames);
 
                 if(!string.IsNullOrEmpty(notAddedServiceNames))

@@ -9,14 +9,14 @@ using System.Runtime.CompilerServices;
 using System.ServiceProcess;
 using System.Threading.Tasks;
 
-namespace Dienste_Verwaltung.src.Controller
+namespace Dienste_Verwaltung.src.Service
 {
     public class Services : INotifyPropertyChanged
     {
         #region properties
 
 
-        public ObservableCollection<Service> Collection { get; private set; } = new ObservableCollection<Service>();
+        public ObservableCollection<DataModels.Service> Collection { get; private set; } = new ObservableCollection<DataModels.Service>();
 
 
         #endregion
@@ -24,13 +24,13 @@ namespace Dienste_Verwaltung.src.Controller
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private readonly Dictionary<string, Func<Service, string>> orderFunctions = new()
+        private readonly Dictionary<string, Func<DataModels.Service, string>> orderFunctions = new()
         {
-            { "Anzeigename", (Service s1) => { return s1.ServiceController.DisplayName; } },
-            { "Dienstname", (Service s1) => { return s1.ServiceName; } },
-            { "Status", (Service s1) => { return s1.ServiceController.Status.ToString(); } },
-            { "Starttyp", (Service s1) => { return s1.ServiceController.StartType.ToString(); } },
-            { "Anmelden als", (Service s1) => { return s1.StartName; } }
+            { "Anzeigename", (DataModels.Service s1) => { return s1.ServiceController.DisplayName; } },
+            { "Dienstname", (DataModels.Service s1) => { return s1.ServiceName; } },
+            { "Status", (DataModels.Service s1) => { return s1.ServiceController.Status.ToString(); } },
+            { "Starttyp", (DataModels.Service s1) => { return s1.ServiceController.StartType.ToString(); } },
+            { "Anmelden als", (DataModels.Service s1) => { return s1.StartName; } }
         };
 
 
@@ -48,7 +48,7 @@ namespace Dienste_Verwaltung.src.Controller
             Array.Sort(services, (service1, service2) => service1.DisplayName.CompareTo(service2.DisplayName));
             foreach (ServiceController service in services)
             {
-                Collection.Add(new Service(service));
+                Collection.Add(new DataModels.Service(service));
             }
 
             await Task.Run(() => LoadDescription());
@@ -58,11 +58,11 @@ namespace Dienste_Verwaltung.src.Controller
         {
             if (sortOrder == 1)
             {
-                Collection = new ObservableCollection<Service>(Collection.OrderBy(orderFunctions[orderIdentifier]));
+                Collection = new ObservableCollection<DataModels.Service>(Collection.OrderBy(orderFunctions[orderIdentifier]));
             }
             else
             {
-                Collection = new ObservableCollection<Service>(Collection.OrderByDescending(orderFunctions[orderIdentifier]));
+                Collection = new ObservableCollection<DataModels.Service>(Collection.OrderByDescending(orderFunctions[orderIdentifier]));
             }
             NotifyPropertyChanged(nameof(Collection));
         }
@@ -82,7 +82,7 @@ namespace Dienste_Verwaltung.src.Controller
 
         private void LoadDescription()
         {
-            foreach (Service serviceItem in Collection)
+            foreach (DataModels.Service serviceItem in Collection)
             {
                 try
                 {

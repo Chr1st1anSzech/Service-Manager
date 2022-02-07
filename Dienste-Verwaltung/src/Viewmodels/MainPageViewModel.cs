@@ -2,19 +2,20 @@
 using Dienste_Verwaltung.src.DataReader;
 using Microsoft.UI.Xaml;
 using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using ListViewHeaderItem = Dienste_Verwaltung.src.UserControls.ListViewHeaderItem;
 using System.Collections.Generic;
 using System.ServiceProcess;
-using Dienste_Verwaltung.src.Controller;
+using Dienste_Verwaltung.src.Service;
+using Dienste_Verwaltung.src.Helper;
 
 namespace Dienste_Verwaltung.src.Viewmodels
 {
-    public class MainPageViewModel : INotifyPropertyChanged
+    public class MainPageViewModel : ObservableObject
     {
         #region properties
 
+        public MyCommand RefreshListCommand { get; set; }
+        public MyCommand NewGroupCommand { get; set; }
 
         public ServiceGroups ServiceGroups { get; private set; } = new ServiceGroups(
             new ServiceToFileWriter(), 
@@ -63,20 +64,25 @@ namespace Dienste_Verwaltung.src.Viewmodels
 
         #endregion
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        
 
         private readonly Dictionary<string, Action<ServiceController>> serviceFunctions = new()
         {
-            { "Start", (ServiceController s1) => { SvcController.StartService(s1); } },
-            { "Stop", (ServiceController s1) => { SvcController.StopService(s1); } },
-            { "Pause", (ServiceController s1) => { SvcController.PauseService(s1); } },
-            { "Continue", (ServiceController s1) => { SvcController.ContinueService(s1); } },
-            { "Restart", (ServiceController s1) => { SvcController.RestartService(s1); } }
+            { "Start", (ServiceController s1) => { ServiceOperations.StartService(s1); } },
+            { "Stop", (ServiceController s1) => { ServiceOperations.StopService(s1); } },
+            { "Pause", (ServiceController s1) => { ServiceOperations.PauseService(s1); } },
+            { "Continue", (ServiceController s1) => { ServiceOperations.ContinueService(s1); } },
+            { "Restart", (ServiceController s1) => { ServiceOperations.RestartService(s1); } }
         };
 
+        public ITextInputDialogService TextInputDialogService { get; set; }
 
         #region public methods
 
+        public MainPageViewModel()
+        {
+            SetCommands();
+        }
 
         public void OnNavigatedTo()
         {
@@ -111,13 +117,14 @@ namespace Dienste_Verwaltung.src.Viewmodels
         }
 
 
-        public void CreateNewGroup(string groupName)
+        public async void CreateNewGroup()
         {
-            ServiceGroups.Create(groupName);
+            string result = await TextInputDialogService.ShowDefaultDialogAsync("Neue Gruppe", "Geben Sie den Namen ein:", GetGroupNames());
+            ServiceGroups.Create(result);
         }
 
 
-        public void AddToGroup(ServiceGroup group, IEnumerable<Service> services, out string notAddedServiceNames)
+        public void AddToGroup(ServiceGroup group, IEnumerable<DataModels.Service> services, out string notAddedServiceNames)
         {
             ServiceGroups.AddService(group, services, out notAddedServiceNames);
         }
@@ -128,9 +135,11 @@ namespace Dienste_Verwaltung.src.Viewmodels
 
         #region private methods
 
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+
+        private void SetCommands()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            RefreshListCommand = new MyCommand(UpdateServiceItemSource);
+            NewGroupCommand = new MyCommand(CreateNewGroup);
         }
 
 
