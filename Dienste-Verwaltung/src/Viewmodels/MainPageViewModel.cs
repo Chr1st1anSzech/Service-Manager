@@ -7,23 +7,61 @@ using System.Collections.Generic;
 using System.ServiceProcess;
 using Dienste_Verwaltung.src.Service;
 using Dienste_Verwaltung.src.Helper;
+using Microsoft.UI.Xaml.Controls;
 
 namespace Dienste_Verwaltung.src.Viewmodels
 {
     public class MainPageViewModel : ObservableObject
     {
-        #region properties
-
+        #region commands
         public MyCommand RefreshListCommand { get; set; }
         public MyCommand NewGroupCommand { get; set; }
+        public MyCommand RemoveGroupCommand { get; set; }
+        #endregion
 
+
+        #region properties
+        public ITextInputDialogService TextInputDialogService { get; set; }
         public ServiceGroups ServiceGroups { get; private set; } = new ServiceGroups(
-            new ServiceToFileWriter(), 
+            new ServiceToFileWriter(),
             new ServiceFromFileReader());
-
-
         public Services Services { get; private set; } = new Services();
+        
+        private object selectedItem;
+        public object SelectedItem
+        {
+            get
+            {
+                return selectedItem;
+            }
 
+            set
+            {
+                if (value != selectedItem)
+                {
+                    selectedItem = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        private object selectedService;
+        public object SelectedService
+        {
+            get
+            {
+                return selectedService;
+            }
+
+            set
+            {
+                if (value != selectedService)
+                {
+                    selectedService = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
 
         private Visibility previewVisible = Visibility.Collapsed;
         public Visibility PreviewVisible
@@ -43,7 +81,6 @@ namespace Dienste_Verwaltung.src.Viewmodels
             }
         }
 
-
         private ListViewHeaderItem selectedHeader;
         public ListViewHeaderItem SelectedHeader
         {
@@ -60,12 +97,11 @@ namespace Dienste_Verwaltung.src.Viewmodels
                 }
             }
         }
-
-
         #endregion
 
-        
 
+        #region private variables
+        
         private readonly Dictionary<string, Action<ServiceController>> serviceFunctions = new()
         {
             { "Start", (ServiceController s1) => { ServiceOperations.StartService(s1); } },
@@ -74,8 +110,9 @@ namespace Dienste_Verwaltung.src.Viewmodels
             { "Continue", (ServiceController s1) => { ServiceOperations.ContinueService(s1); } },
             { "Restart", (ServiceController s1) => { ServiceOperations.RestartService(s1); } }
         };
+        #endregion
 
-        public ITextInputDialogService TextInputDialogService { get; set; }
+
 
         #region public methods
 
@@ -87,15 +124,6 @@ namespace Dienste_Verwaltung.src.Viewmodels
         public void OnNavigatedTo()
         {
             UpdateServiceItemSource();
-        }
-
-
-        public void UpdateServiceItemSource()
-        {
-            Services.Clear();
-            ServiceGroups.Clear();
-            Services.ReadFromStorage();
-            ServiceGroups.ReadFromStorage(Services.Collection);
         }
 
 
@@ -111,17 +139,6 @@ namespace Dienste_Verwaltung.src.Viewmodels
         }
 
 
-        public string[] GetGroupNames()
-        {
-            return ServiceGroups.ListNames();
-        }
-
-
-        public async void CreateNewGroup()
-        {
-            string result = await TextInputDialogService.ShowDefaultDialogAsync("Neue Gruppe", "Geben Sie den Namen ein:", GetGroupNames());
-            ServiceGroups.Create(result);
-        }
 
 
         public void AddToGroup(ServiceGroup group, IEnumerable<DataModels.Service> services, out string notAddedServiceNames)
@@ -136,10 +153,42 @@ namespace Dienste_Verwaltung.src.Viewmodels
         #region private methods
 
 
+        private string[] GetGroupNames()
+        {
+            return ServiceGroups.ListNames();
+        }
+
+
+        private async void CreateNewGroup()
+        {
+            string result = await TextInputDialogService.ShowDefaultDialogAsync("Neue Gruppe", "Geben Sie den Namen ein:", GetGroupNames());
+            if (result != null)
+            {
+                ServiceGroups.Create(result);
+            }
+        }
+
+
+        private void RemoveItem()
+        {
+            ServiceGroups.RemoveItem(SelectedItem);
+        }
+
+
+        private void UpdateServiceItemSource()
+        {
+            Services.Clear();
+            ServiceGroups.Clear();
+            Services.ReadFromStorage();
+            ServiceGroups.ReadFromStorage(Services.Collection);
+        }
+
+
         private void SetCommands()
         {
             RefreshListCommand = new MyCommand(UpdateServiceItemSource);
             NewGroupCommand = new MyCommand(CreateNewGroup);
+            RemoveGroupCommand = new MyCommand(RemoveItem);
         }
 
 

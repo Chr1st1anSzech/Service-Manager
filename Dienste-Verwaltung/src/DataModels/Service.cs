@@ -28,6 +28,9 @@ namespace Dienste_Verwaltung.src.DataModels
         public string Path { get; set; }
 
 
+        public string GroupMembership { get; set; }
+
+
         #endregion
 
 

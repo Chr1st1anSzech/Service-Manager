@@ -11,11 +11,7 @@ namespace Dienste_Verwaltung.src.Service
     public class ServiceGroups
     {
         #region properties
-
-
         public ObservableCollection<ServiceGroup> Collection { get; private set; } = new ObservableCollection<ServiceGroup>();
-
-
         #endregion
 
         private readonly IServiceWriter writer;
@@ -76,6 +72,24 @@ namespace Dienste_Verwaltung.src.Service
             writer.WriteServiceGroups(Collection);
         }
 
+        public void RemoveItem(object item)
+        {
+            if (item is ServiceGroup group)
+            {
+                Collection.Remove(group);
+            }
+            else if( item is DataModels.Service service && !string.IsNullOrWhiteSpace(service.GroupMembership) )
+            {
+                ServiceGroup parentGroup = GetGroupByName(service.GroupMembership);
+                parentGroup?.Services.Remove(service);
+            }
+            writer.WriteServiceGroups(Collection);
+        }
+
+        public ServiceGroup GetGroupByName(string groupName)
+        {
+            return Collection.FirstOrDefault(x => x.GroupName == groupName);
+        }
 
         public string[] ListNames()
         {

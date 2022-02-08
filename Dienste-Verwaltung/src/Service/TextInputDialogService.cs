@@ -1,5 +1,6 @@
 ﻿using Dienste_Verwaltung.src.Views;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,8 @@ namespace Dienste_Verwaltung.src.Service
         public async Task<string> ShowDefaultDialogAsync(string title, string content, string[] forbiddenInputs)
         {
             TextInputDialog dialog = new(root, title, content, forbiddenInputs);
-            await dialog.ShowAsync();
-            return dialog.ViewModel.InputText;
+            ContentDialogResult result = await dialog.ShowAsync();
+            return result == ContentDialogResult.Primary ? dialog.ViewModel.InputText : null;
         }
     }
 }

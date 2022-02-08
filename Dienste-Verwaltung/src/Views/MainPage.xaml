@@ -74,6 +74,7 @@
                 <Button
                     x:Name="DeleteGroupButton"
                     AccessKey="D"
+                    Command="{Binding RemoveGroupCommand}"
                     Style="{StaticResource IconButton}"
                     IsEnabled="{Binding ElementName=GroupsTreeView, Path=SelectedItem, Converter={StaticResource ObjectToBoolConverter} }"
                     Content="{StaticResource DeleteGroupIconData}" />
@@ -232,6 +233,7 @@
                     ItemsSource="{Binding ServiceGroups.Collection}"
                     AllowDrop="True"
                     x:Name="GroupsTreeView"
+                    SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     ItemTemplateSelector="{StaticResource GroupServiceItemTemplateSelector}">
                     <TreeView.ItemContainerStyle>
                         <Style
@@ -354,6 +356,7 @@
                 SelectionMode="Extended"
                 x:Name="ServiceListView"
                 CanDragItems="True"
+                SelectedItem="{Binding SelectedService, UpdateSourceTrigger=PropertyChanged}"
                 SelectionChanged="ServiceListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>

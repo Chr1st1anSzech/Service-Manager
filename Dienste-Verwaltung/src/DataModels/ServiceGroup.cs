@@ -1,4 +1,5 @@
 ﻿using Dienste_Verwaltung.src.DataReader;
+using Dienste_Verwaltung.src.Helper;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Dienste_Verwaltung.src.DataModels
 {
-    public class ServiceGroup : INotifyPropertyChanged
+    public class ServiceGroup : ObservableObject
     {
         public string GroupName { get; set; }
         private ObservableCollection<Service> services = new();
@@ -25,11 +26,6 @@ namespace Dienste_Verwaltung.src.DataModels
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         public ServiceGroup(string name)
         {
@@ -38,7 +34,10 @@ namespace Dienste_Verwaltung.src.DataModels
         public ServiceGroup(string name, IEnumerable<Service> services)
         {
             GroupName = name;
-            Services = new ObservableCollection<Service>(Services.Concat(services));
+            foreach (Service service in services)
+            {
+                AddService(service);
+            }
         }
 
         public bool AddService(Service service)
@@ -46,6 +45,7 @@ namespace Dienste_Verwaltung.src.DataModels
             if( !Services.Contains(service))
             {
                 Services.Add(service);
+                service.GroupMembership = GroupName;
                 return true;
             }
             return false;

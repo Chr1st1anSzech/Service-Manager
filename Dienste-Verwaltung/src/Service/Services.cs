@@ -1,4 +1,5 @@
 ﻿using Dienste_Verwaltung.src.DataModels;
+using Dienste_Verwaltung.src.Helper;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,18 +12,12 @@ using System.Threading.Tasks;
 
 namespace Dienste_Verwaltung.src.Service
 {
-    public class Services : INotifyPropertyChanged
+    public class Services : ObservableObject
     {
         #region properties
-
-
         public ObservableCollection<DataModels.Service> Collection { get; private set; } = new ObservableCollection<DataModels.Service>();
 
-
         #endregion
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly Dictionary<string, Func<DataModels.Service, string>> orderFunctions = new()
         {
@@ -72,12 +67,6 @@ namespace Dienste_Verwaltung.src.Service
 
 
         #region private methods
-
-
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
 
         private void LoadDescription()

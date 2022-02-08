@@ -22,8 +22,8 @@ namespace Dienste_Verwaltung.src.Viewmodels
                 }
             }
         }
-        
-        
+
+
         private bool isPrimaryButtonEnabled = false;
         public bool IsPrimaryButtonEnabled {
             get
