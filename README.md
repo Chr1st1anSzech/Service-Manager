@@ -13,5 +13,9 @@ Furthermore, it should be possible to assign the services to groups. This should
 Filtering should be possible on the basis of the groups in order to quickly have the most important things in view.
 
 ## Screenshots
+
 ![Files](Assets/MainPage.png)
+Fig.1 - Application in light design
+
 ![Files](Assets/MainPage-Dark.png)
+Fig.1 - Application in dark design
