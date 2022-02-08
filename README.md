@@ -18,4 +18,4 @@ Filtering should be possible on the basis of the groups in order to quickly have
 Fig.1 - Application in light design
 
 ![Files](Assets/MainPage-Dark.png)
-Fig.1 - Application in dark design
+Fig.2 - Application in dark design
